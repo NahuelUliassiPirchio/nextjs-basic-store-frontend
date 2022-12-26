@@ -16,14 +16,16 @@ export default function NavBar () {
       </div>
       <div className={styles.links}>
         <Link className={styles.link} href='#'>Home</Link>
+        <Link className={styles.link} href='#'>Products</Link>
         <Link className={styles.link} href='#'>About</Link>
         <Link className={styles.link} href='#'>Contact</Link>
       </div>
       <div className={styles.search}>
         <input type='text' placeholder='Search...' />
       </div>
-      <div className={styles.login}>
-        <button>Login</button>
+      <div className={styles.buttons}>
+        <Link href='#' className={styles.button}>Login</Link>
+        <Link href='#' className={styles.button}>Sign Up</Link>
       </div>
     </div>
   )

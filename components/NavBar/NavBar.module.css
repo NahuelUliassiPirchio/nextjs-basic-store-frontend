@@ -20,13 +20,14 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 10rem;
+  width: 15rem;
 }
 
 .link {
+  color: #000;
+  text-decoration: none;
   font-size: 1rem;
   font-weight: 500;
-  color: #000;
 }
 
 .link:hover {
@@ -42,19 +43,43 @@
   border-radius: 0.25rem;
 }
 
-.login {
+.buttons {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 5rem;
+  width: 10rem;
+  margin-right: 50px;
 }
 
-.login button {
-  width: 2rem;
-  height: 2rem;
-  border: none;
-  border-radius: 50%;
+.login {
   background-color: #000;
   color: #FFF;
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.login:hover {
+  background-color: #FFF;
+  color: #000;
+  border: 1px solid #000;
+}
+
+.sign-up {
+  background-color: #FFF;
+  color: #000;
+  border: 1px solid #000;
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.sign-up:hover {
+  background-color: #000;
+  color: #FFF;
+  border: none;
 }
