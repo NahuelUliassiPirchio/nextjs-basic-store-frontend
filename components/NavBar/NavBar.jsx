@@ -1,0 +1,30 @@
+import Image from 'next/image'
+import Link from 'next/link'
+import styles from './NavBar.module.css'
+
+export default function NavBar () {
+  return (
+    <div className={styles.navbar}>
+      <div className={styles.logo}>
+        <Image
+          src='/next.svg'
+          alt='Next.js Logo'
+          width={180}
+          height={37}
+          priority
+        />
+      </div>
+      <div className={styles.links}>
+        <Link className={styles.link} href='#'>Home</Link>
+        <Link className={styles.link} href='#'>About</Link>
+        <Link className={styles.link} href='#'>Contact</Link>
+      </div>
+      <div className={styles.search}>
+        <input type='text' placeholder='Search...' />
+      </div>
+      <div className={styles.login}>
+        <button>Login</button>
+      </div>
+    </div>
+  )
+}
