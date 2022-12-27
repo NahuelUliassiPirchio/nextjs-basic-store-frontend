@@ -5,7 +5,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'imgs.search.brave.com',
+        hostname: 'fakestoreapi.com',
         port: ''
       }
     ]
