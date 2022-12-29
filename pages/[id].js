@@ -1,5 +1,3 @@
-// Page that displays a single product by ID
-
 import Product from '../components/Product/Product'
 
 export async function getServerSideProps (context) {

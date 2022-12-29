@@ -15,7 +15,7 @@ export default function NavBar () {
         />
       </div>
       <div className={styles.links}>
-        <Link className={styles.link} href='#'>Home</Link>
+        <Link className={styles.link} href='/'>Home</Link>
         <Link className={styles.link} href='#'>Products</Link>
         <Link className={styles.link} href='#'>About</Link>
         <Link className={styles.link} href='#'>Contact</Link>
@@ -24,8 +24,8 @@ export default function NavBar () {
         <input type='text' placeholder='Search...' />
       </div>
       <div className={styles.buttons}>
-        <Link href='#' className={styles.button}>Login</Link>
-        <Link href='#' className={styles.button}>Sign Up</Link>
+        <Link href='/login' className={styles.login}>Login</Link>
+        <Link href='/signup' className={styles.signUp}>Sign Up</Link>
       </div>
     </div>
   )

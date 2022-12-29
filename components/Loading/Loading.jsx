@@ -1,4 +1,3 @@
-// create a loading component
 import style from './Loading.module.css'
 
 export default function Loading () {

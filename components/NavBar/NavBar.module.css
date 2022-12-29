@@ -68,7 +68,7 @@
   border: 1px solid #000;
 }
 
-.sign-up {
+.signUp {
   background-color: #FFF;
   color: #000;
   border: 1px solid #000;
@@ -78,7 +78,7 @@
   font-weight: 500;
 }
 
-.sign-up:hover {
+.signUp:hover {
   background-color: #000;
   color: #FFF;
   border: none;

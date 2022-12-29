@@ -7,11 +7,10 @@ export default function ProductItem ({ product }) {
   return (
     <div className={style.container} onClick={() => router.push(`/${product.id}`)}>
       <div className={style.image}>
-        <Image src={product.image} alt={product.name} width={300} height={300} />
+        <Image src={product.image} alt={product.title} width={300} height={300} />
       </div>
       <div className={style.details}>
-        <h3>{product.name}</h3>
-        <p className={style.description}>{product.description}</p>
+        <h3>{product.title}</h3>
         <p className={style.price}>${product.price}</p>
       </div>
     </div>
