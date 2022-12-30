@@ -39,8 +39,8 @@
 
 .productInfo > h1 {
   font-weight: bold;
-    font-size: 1.5rem;
-    padding-left: 1rem;
+  font-size: 1.5rem;
+  padding-left: 1rem;
 }
 
 .description {
@@ -50,8 +50,8 @@
 
 .price {
   height: 50%;
-    margin: 1rem;
-    color: #c7c095;
-    font-weight: bold;
-    font-size: 1.5rem;
+  margin: 1rem;
+  color: #c7c095;
+  font-weight: bold;
+  font-size: 1.5rem;
 }
