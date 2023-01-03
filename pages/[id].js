@@ -1,8 +1,10 @@
 import Product from '../components/Product/Product'
 
+const URL = process.env.STORE_API_URL
+
 export async function getServerSideProps (context) {
   const { id } = context.query
-  const res = await fetch(`https://fakestoreapi.com/products/${id}`)
+  const res = await fetch(`${URL}/products/${id}`)
   const product = await res.json()
   return {
     props: {

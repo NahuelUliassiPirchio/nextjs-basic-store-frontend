@@ -1,13 +1,24 @@
-import Loading from '../components/Loading/Loading'
 import ProductsList from '../components/ProductsList/ProductsList'
-import useGetList from '../hooks/useGetList'
 
-export default function Home () {
-  const { list, loading } = useGetList('https://fakestoreapi.com/products')
+const URL = process.env.STORE_API_URL
+
+export async function getServerSideProps () {
+  const res = await fetch(`${URL}/products`)
+  const list = await res.json()
+  return {
+    props: {
+      list
+    }
+  }
+}
+
+export default function Home ({ list }) {
+  // const { list, loading } = useGetList('http://localhost:3001/products')
 
   return (
     <>
-      {loading ? <Loading /> : <ProductsList products={list} />}
+      <ProductsList products={list} />
+      {/* {loading ? <Loading /> : <ProductsList products={list} />} */}
     </>
   )
 }

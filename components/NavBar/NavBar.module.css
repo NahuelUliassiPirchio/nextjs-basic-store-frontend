@@ -71,15 +71,22 @@
 .signUp {
   background-color: #FFF;
   color: #000;
+  min-width: 80px;
   border: 1px solid #000;
   border-radius: 0.25rem;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem;
   font-size: 1rem;
   font-weight: 500;
 }
 
 .signUp:hover {
-  background-color: #000;
+  background-color: rgb(119, 110, 110);
   color: #FFF;
   border: none;
+}
+
+@media (max-width: 768px) {
+  .search {
+    display: none;
+  }
 }
