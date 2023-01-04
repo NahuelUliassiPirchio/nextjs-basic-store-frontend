@@ -1,0 +1,81 @@
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 90vh;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+.profileInfo img {
+  object-fit: cover;
+  border-radius: 5px;
+  margin-right: auto;
+  margin-left: 50px;
+}
+
+.userInfo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+  padding: 50px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.userInfo input {
+  width: 100%;
+  max-width: 400px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+  color: rgb(109, 107, 107);
+  font-size: 16px;
+  font-weight: 600;
+  padding: 0 10px;
+}
+
+.userInfo input:focus {
+  outline: none;
+}
+
+.userInfo input:active, .userInfo input:focus {
+  background-color: #e0e0e09a;
+  color: #000;
+}
+
+
+.userInfo button {
+  width: 50%;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+  color: #000;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 50px;
+  grid-column: 1 / -1;
+  justify-self: center;
+}
+
+.userInfo button:hover {
+  background-color: #e0e0e09a;
+}
+
+.userInfo button:active {
+  background-color: #d0d0d09a;
+}
+
+@media (max-width: 768px) {
+  .profileInfo img {
+    margin-left: 0;
+  }
+  .userInfo {
+    padding: 20px;
+  }
+}

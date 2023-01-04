@@ -1,6 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { useState } from 'react'
 import { useAuth } from '../../hooks/useAuth'
+import Menu from '../Menu/Menu'
 
 import styles from './NavBar.module.css'
 
@@ -8,11 +10,13 @@ export default function NavBar () {
   const auth = useAuth()
   const { user } = auth
 
-  const onLogOutHandler = () => {
-    auth.signout()
-    window.location.reload()
+  const [showMenu, setShowMenu] = useState(false)
+
+  const photoClickHandler = () => {
+    setShowMenu(!showMenu)
   }
 
+  console.log(user)
   return (
     <div className={styles.navbar}>
       <div className={styles.logo}>
@@ -36,9 +40,8 @@ export default function NavBar () {
       {auth.user
         ? (
           <div className={styles.user}>
-            <button onClick={onLogOutHandler}>Logout</button>
-            <Image src={'https://' + user.avatar} alt='User' width={30} height={30} />
-            <p>{user.name}</p>
+            <Image src={'https://' + user.avatar} alt='User' width={30} height={30} onClick={photoClickHandler} draggable={false} />
+            {showMenu && <Menu auth={auth} />}
           </div>
           )
         : (
