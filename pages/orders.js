@@ -9,7 +9,7 @@ export default function OrdersPage () {
   useEffect(() => {
     async function fetchOrders () {
       const token = Cookies.get('token')
-      const res = await fetch('http://localhost:3001/orders', {
+      const res = await fetch('http://localhost:3001/orders?order=DESC', {
         headers: {
           Authorization: `Bearer ${token}`
         }

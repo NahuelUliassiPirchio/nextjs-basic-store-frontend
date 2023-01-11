@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { useAuth } from '../../hooks/useAuth'
 import Menu from '../Menu/Menu'
+import Search from '../Search/Search'
 
 import styles from './NavBar.module.css'
 
@@ -34,9 +35,7 @@ export default function NavBar () {
         <Link className={styles.link} href='#'>About</Link>
         <Link className={styles.link} href='#'>Contact</Link>
       </div>
-      <div className={styles.search}>
-        <input type='text' placeholder='Search...' />
-      </div>
+      <Search />
       {auth.user
         ? (
           <div className={styles.user}>
