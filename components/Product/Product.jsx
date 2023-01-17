@@ -1,11 +1,13 @@
 import Image from 'next/image'
-import styles from './Product.module.css'
 import Cookies from 'js-cookie'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 
-export default function Product ({ product }) {
+import styles from './Product.module.css'
+
+export default function Product ({ product, bidUp }) {
   const token = Cookies.get('token')
   const [buttonText, setButtonText] = useState('Add to Order')
+  const bidAmount = useRef()
 
   const handleAddToOrderClick = async () => {
     let order = await fetch('http://localhost:3001/orders?isActive=true', {
@@ -58,8 +60,29 @@ export default function Product ({ product }) {
       <div className={styles.productInfo}>
         <h1 className={styles.name}>{product.name}</h1>
         <p className={styles.description}>{product.description}</p>
-        <p className={styles.price}>${product.price}</p>
-        <button className={styles.addToOrderButton} onClick={handleAddToOrderClick}>{buttonText}</button>
+        {
+          bidUp
+            ? (
+              <>
+                <div className={styles.bidUp}>
+                  <button onClick={() => bidUp(1)}>Bid Up $1</button>
+                  <button onClick={() => bidUp(5)}>Bid Up $5</button>
+                  <button onClick={() => bidUp(10)}>Bid Up $10</button>
+                </div>
+                <div className={styles.customBid}>
+                  <input type='number' ref={bidAmount} />
+                  <button onClick={() => bidUp(bidAmount.current.value)}>Bid Up</button>
+                </div>
+              </>
+              )
+            : (
+              <>
+                <p className={styles.price}>${product.price}</p>
+                <button className={styles.addToOrderButton} onClick={handleAddToOrderClick}>{buttonText}</button>
+              </>
+              )
+
+        }
       </div>
     </div>
   )

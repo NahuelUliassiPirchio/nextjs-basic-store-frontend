@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import Product from '../components/Product/Product'
 
 const URL = process.env.STORE_API_URL
@@ -14,5 +15,13 @@ export async function getServerSideProps (context) {
 }
 
 export default function ProductDisplay ({ product }) {
-  return <Product product={product} />
+  return (
+    <>
+      <Head>
+        {/* TODO: add brand */}
+        <title>{`${product.name}`}</title>
+      </Head>
+      <Product product={product} />
+    </>
+  )
 }

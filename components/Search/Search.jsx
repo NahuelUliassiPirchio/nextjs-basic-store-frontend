@@ -11,14 +11,13 @@ export default function Search () {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch(`http://localhost:3001/products?name=${query}`, {
+      const res = await fetch(`http://localhost:3001/products?name=${query}&hasBid=`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
       })
       const data = await res.json()
       setResults(data)
-      console.log(data)
     }
     fetchData()
   }, [query])
@@ -38,7 +37,7 @@ export default function Search () {
             </li>
           ))
         )}
-      </ul>)}
+                       </ul>)}
     </div>
   )
 }

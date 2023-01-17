@@ -63,3 +63,25 @@
   margin: 0.5rem;
   cursor: pointer;
 }
+
+/* .bidUp is a container of buttons that are used to bid up the price and an input field to enter a bid */
+.bidUp {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  max-width: 600px;
+}
+
+.bidUp > button {
+  background-color: #c7c095;
+  color: #000;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  cursor: pointer;
+}
