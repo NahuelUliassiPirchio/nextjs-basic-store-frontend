@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 import { useAuth } from '../../hooks/useAuth'
+import CategoriesList from '../CategoriesList/CategoriesList'
 import Menu from '../Menu/Menu'
 import Search from '../Search/Search'
 
@@ -12,6 +13,7 @@ export default function NavBar () {
   const { user } = auth
 
   const [showMenu, setShowMenu] = useState(false)
+  const [showCategories, setShowCategories] = useState(false)
 
   const photoClickHandler = () => {
     setShowMenu(!showMenu)
@@ -20,7 +22,7 @@ export default function NavBar () {
   console.log(user)
   return (
     <div className={styles.navbar}>
-      <div className={styles.logo}>
+      <Link className={styles.logo} href='/'>
         <Image
           src='/next.svg'
           alt='Next.js Logo'
@@ -28,13 +30,14 @@ export default function NavBar () {
           height={37}
           priority
         />
-      </div>
+      </Link>
       <div className={styles.links}>
         <Link className={styles.link} href='/'>Home</Link>
-        <Link className={styles.link} href='#'>Products</Link>
+        <Link className={styles.link} href='#' onClick={() => setShowCategories(!showCategories)}> Categories</Link>
         <Link className={styles.link} href='#'>About</Link>
         <Link className={styles.link} href='#'>Contact</Link>
       </div>
+      {showCategories && <CategoriesList />}
       <Search />
       {auth.user
         ? (

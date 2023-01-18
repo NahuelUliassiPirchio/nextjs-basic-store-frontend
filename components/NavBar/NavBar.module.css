@@ -28,11 +28,11 @@
   text-decoration: none;
   font-size: 1rem;
   font-weight: 500;
+  margin-right: 15px;
 }
 
 .link:hover {
-  color: #FFF;
-  text-decoration: underline;
+  color: gray;
 }
 
 .search input {
@@ -95,6 +95,9 @@
 
 @media (max-width: 768px) {
   .search {
+    display: none;
+  }
+  .links {
     display: none;
   }
 }

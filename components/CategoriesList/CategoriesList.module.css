@@ -1,0 +1,32 @@
+.categories {
+  position: absolute;
+  top: 2.5rem;
+  left: 25rem;
+  background-color: black;
+  padding: 0 20px;
+  padding-top: 20px;
+}
+
+.categoriesList {
+  display: flex;
+  flex-direction: column;
+  margin: 0 -10px;
+}
+
+.categoriesList li {
+  width: 33.33%;
+  padding: 0 10px;
+  list-style: none;
+  margin-bottom: 20px;
+}
+
+.categoriesList li a {
+  color: #FFF;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.categoriesList li a:hover {
+  color: gray;
+}
