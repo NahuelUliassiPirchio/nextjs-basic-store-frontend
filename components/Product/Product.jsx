@@ -4,7 +4,7 @@ import { useState, useRef } from 'react'
 
 import styles from './Product.module.css'
 
-export default function Product ({ product, bidUp }) {
+export default function Product ({ product, bidUp, currentPrice }) {
   const token = Cookies.get('token')
   const [buttonText, setButtonText] = useState('Add to Order')
   const bidAmount = useRef()
@@ -70,7 +70,7 @@ export default function Product ({ product, bidUp }) {
                   <button onClick={() => bidUp(10)}>Bid Up $10</button>
                 </div>
                 <div className={styles.customBid}>
-                  <input type='number' ref={bidAmount} />
+                  <input type='number' ref={bidAmount} defaultValue={currentPrice + 1} min={currentPrice} />
                   <button onClick={() => bidUp(bidAmount.current.value)}>Bid Up</button>
                 </div>
               </>

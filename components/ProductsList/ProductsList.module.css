@@ -8,6 +8,11 @@
   padding-inline-start: 0px;
 }
 
+.productsList li {
+  list-style: none;
+  padding: 10px;
+}
+
 .productsList > * {
   justify-self: center;
 }

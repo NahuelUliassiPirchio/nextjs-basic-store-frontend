@@ -16,6 +16,7 @@ export const useAuth = () => {
 
 function useAuthProvider () {
   const [user, setUser] = useState(null)
+  const [isLoading, setIsLoading] = useState(true)
 
   const signin = (email, password) => fetch(URL, {
     method: 'POST',
@@ -31,6 +32,7 @@ function useAuthProvider () {
       return res
     }
     )
+    .finally(() => setIsLoading(false))
 
   const signout = () => {
     return new Promise(resolve => {
@@ -48,16 +50,24 @@ function useAuthProvider () {
           Authorization: `Bearer ${token}`
         }
       })
-        .then(res => res.json())
+        .then(res => {
+          if (!res.ok) {
+            return signout()
+          }
+          return res.json()
+        })
         .then(res => setUser(res))
+        .finally(() => setIsLoading(false))
     } else {
       setUser(false)
+      setIsLoading(false)
     }
   }, [])
 
   return {
     user,
     signin,
-    signout
+    signout,
+    isLoading
   }
 }

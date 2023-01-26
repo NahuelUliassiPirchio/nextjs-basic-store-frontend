@@ -15,7 +15,6 @@ export default function OrdersPage () {
         }
       })
       const data = await res.json()
-      console.log(data)
       setOrders(data)
     }
     fetchOrders()

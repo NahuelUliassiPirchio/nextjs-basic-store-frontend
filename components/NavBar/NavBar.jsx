@@ -9,8 +9,7 @@ import Search from '../Search/Search'
 import styles from './NavBar.module.css'
 
 export default function NavBar () {
-  const auth = useAuth()
-  const { user } = auth
+  const { user, isLoading } = useAuth()
 
   const [showMenu, setShowMenu] = useState(false)
   const [showCategories, setShowCategories] = useState(false)
@@ -19,7 +18,6 @@ export default function NavBar () {
     setShowMenu(!showMenu)
   }
 
-  console.log(user)
   return (
     <div className={styles.navbar}>
       <Link className={styles.logo} href='/'>
@@ -33,18 +31,21 @@ export default function NavBar () {
       </Link>
       <div className={styles.links}>
         <Link className={styles.link} href='/'>Home</Link>
-        <Link className={styles.link} href='#' onClick={() => setShowCategories(!showCategories)}> Categories</Link>
+        <Link className={styles.link} href='#' onMouseEnter={() => setShowCategories(!showCategories)}> Categories</Link>
+        <Link className={styles.link} href='/bids'>Bids</Link>
         <Link className={styles.link} href='#'>About</Link>
         <Link className={styles.link} href='#'>Contact</Link>
       </div>
       {showCategories && <CategoriesList />}
       <Search />
-      {auth.user
+      {user
         ? (
-          <div className={styles.user}>
-            <Image src={'https://' + user.avatar} alt='User' width={30} height={30} onClick={photoClickHandler} draggable={false} />
-            {showMenu && <Menu auth={auth} />}
-          </div>
+            !isLoading && (
+              <div className={styles.user}>
+                <Image src={'https://' + user.avatar} alt='User' width={30} height={30} onClick={photoClickHandler} draggable={false} />
+                {showMenu && <Menu />}
+              </div>
+            )
           )
         : (
           <div className={styles.buttons}>

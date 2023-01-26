@@ -1,19 +1,12 @@
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import useFetchData from '../../hooks/useFetch'
 import styles from './CategoriesList.module.css'
 
 export default function CategoriesList () {
-  const [categories, setCategories] = useState([])
+  const { data: categories, isLoading } = useFetchData({ url: 'http://localhost:3001/categories', method: 'GET' })
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch('http://localhost:3001/categories')
-      const data = await res.json()
-      setCategories(data)
-    }
-    fetchData()
-  }, [])
-
+  if (isLoading) return <p>Loading...</p>
+  if (!categories) return null
   return (
     <div className={styles.categories}>
       <ul className={styles.categoriesList}>

@@ -1,7 +1,9 @@
 import Link from 'next/link'
+import { useAuth } from '../../hooks/useAuth'
 import styles from './Menu.module.css'
 
-export default function Menu ({ auth }) {
+export default function Menu () {
+  const auth = useAuth()
   const { signout } = auth
   const logoutClickHandler = (e) => {
     e.preventDefault()
