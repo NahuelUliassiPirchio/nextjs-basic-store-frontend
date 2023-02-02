@@ -14,8 +14,8 @@ export default function Search () {
           'Content-Type': 'application/json'
         }
       })
-      const data = await res.json()
-      setResults(data)
+      const fetchedData = await res.json()
+      setResults(fetchedData.data)
     }
     fetchData()
   }, [query])
@@ -26,7 +26,7 @@ export default function Search () {
 
   return (
     <div className={styles.searchContainer}>
-      <input type='text' placeholder='Search...' onChange={onSearch} onFocus={() => setIsSearching(true)} />
+      <input type='text' placeholder='Search...' onChange={onSearch} onFocus={() => setIsSearching(true)} onBlur={() => setIsSearching(false)} />
       {isSearching && (
         <ul className={styles.searchResults}>
           {results.length > 0 && (
