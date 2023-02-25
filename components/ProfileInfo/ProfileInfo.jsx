@@ -2,6 +2,7 @@ import Cookies from 'js-cookie'
 import Image from 'next/image'
 import { useRef } from 'react'
 import Loading from '../Loading/Loading'
+import endpoints from '../../common/endpoints'
 import styles from './ProfileInfo.module.css'
 
 export default function ProfileInfo ({ user }) {
@@ -18,7 +19,7 @@ export default function ProfileInfo ({ user }) {
     const phoneNumber = phoneRef.current.value
 
     const token = Cookies.get('token')
-    await fetch('http://localhost:3001/profile', {
+    await fetch(endpoints.profile.profile(), {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

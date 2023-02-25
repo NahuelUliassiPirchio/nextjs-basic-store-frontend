@@ -7,7 +7,7 @@ export default function useGetList (url, pageNumber = 0) {
 
   useEffect(() => {
     setIsLoading(true)
-    fetch(`${url}`, {
+    fetch(url, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'

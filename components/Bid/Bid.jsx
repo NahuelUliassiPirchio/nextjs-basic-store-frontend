@@ -15,6 +15,7 @@ export default function Bid ({ bid }) {
   const { user } = useAuth()
 
   const bidUp = async (amount) => {
+    if (!user) Router.push('/login')
     const token = Cookies.get('token')
     const response = await fetch(`http://localhost:3001/bids/${bid.id}/bid-items`, {
       method: 'POST',
@@ -29,8 +30,10 @@ export default function Bid ({ bid }) {
       })
     })
     const data = await response.json()
-    if (data.statusCode === 401) Router.push('/login')
-    console.log(data)
+    if (data.error) {
+      alert(data.error)
+    }
+    Router.reload()
   }
 
   return (
@@ -49,23 +52,32 @@ export default function Bid ({ bid }) {
   )
 }
 
-function biddersList (bidders) {
-  if (bidders.length === 0) {
-    return <p>No Bids Yet</p>
-  } else {
-    return bidders.map((bidder) => {
-      console.log(bidder)
-      const bidDate = new Date(bidder.createdAt)
-      dayjs.extend(relativeTime)
-      const timePassedString = dayjs(bidDate).fromNow()
+function handleRefresh () {
+  Router.reload()
+}
 
-      return (
-        <div key={bidder.id} className={styles.bidder}>
-          <p>{bidder.user.name}</p>
-          <p>{timePassedString}</p>
-          <p>$ {bidder.bidAmount}</p>
-        </div>
-      )
-    })
-  }
+function biddersList (bidders) {
+  if (bidders.length === 0) return <p className={styles.noBids}>No bids yet, you can be the first!</p>
+
+  return (
+    <ul className={styles.biddersList}>
+      <button className={styles.refreshButton} onClick={handleRefresh}>Refresh</button>
+      {
+        bidders.map((bidder) => {
+          console.log(bidder)
+          const bidDate = new Date(bidder.createdAt)
+          dayjs.extend(relativeTime)
+          const timePassedString = dayjs(bidDate).fromNow()
+
+          return (
+            <li key={bidder.id} className={styles.bidder}>
+              <p>{bidder.user.name}</p>
+              <p>{timePassedString}</p>
+              <p>$ {bidder.bidAmount}</p>
+            </li>
+          )
+        })
+      }
+    </ul>
+  )
 }

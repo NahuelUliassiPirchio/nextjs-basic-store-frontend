@@ -1,11 +1,10 @@
 import Head from 'next/head'
 import Product from '../components/Product/Product'
-
-const URL = process.env.STORE_API_URL
+import endpoints from '../common/endpoints'
 
 export async function getServerSideProps (context) {
   const { id } = context.query
-  const res = await fetch(`${URL}/products/${id}`)
+  const res = await fetch(endpoints.products.product(id))
   const product = await res.json()
   return {
     props: {

@@ -5,7 +5,7 @@ export default function ProductsList ({ products }) {
   return (
     <ul className={styles.productsList}>
       {
-        products.map(product =>
+        products?.map(product =>
           <li key={product.id} className={styles.productItem}>
             <ProductItem key={product.id} product={product} />
           </li>

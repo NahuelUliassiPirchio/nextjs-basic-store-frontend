@@ -3,7 +3,7 @@ import BidsList from '../../components/BidsList/BidsList'
 export default function BidsPage () {
   return (
     <>
-      <h1 className='title'>Bids</h1>
+      <h1 style={{ margin: '30px 0 0 30px' }}>Bids</h1>
       <BidsList />
     </>
   )

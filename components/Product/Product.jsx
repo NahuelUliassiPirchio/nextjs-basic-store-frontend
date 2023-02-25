@@ -1,15 +1,19 @@
 import Image from 'next/image'
 import Cookies from 'js-cookie'
 import { useState, useRef } from 'react'
+import Router from 'next/router'
 
+import { useAuth } from '../../hooks/useAuth'
 import styles from './Product.module.css'
 
 export default function Product ({ product, bidUp, currentPrice }) {
+  const { user } = useAuth()
   const token = Cookies.get('token')
   const [buttonText, setButtonText] = useState('Add to Order')
   const bidAmount = useRef()
 
   const handleAddToOrderClick = async () => {
+    if (!user) return Router.push('/login')
     let order = await fetch('http://localhost:3001/orders?isActive=true', {
       method: 'GET',
       headers: {
@@ -43,8 +47,6 @@ export default function Product ({ product, bidUp, currentPrice }) {
         orderId: order.id
       })
     }).then(res => res.json())
-
-    console.log(orderItem)
 
     if (orderItem) {
       setButtonText('Added to Order!')

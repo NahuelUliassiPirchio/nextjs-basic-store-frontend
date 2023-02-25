@@ -17,22 +17,35 @@ export const useAuth = () => {
 function useAuthProvider () {
   const [user, setUser] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState(null)
 
-  const signin = (email, password) => fetch(URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ email, password })
-  })
-    .then(res => res.json())
-    .then(res => {
-      setUser(res)
-      Cookie.set('token', res.access_token)
-      return res
+  const signin = async (email, password) => {
+    setIsLoading(true)
+    setError(null)
+
+    try {
+      const response = await fetch(URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password })
+      })
+
+      if (!response.ok) {
+        throw new Error(response.statusText || 'Something went wrong')
+      }
+      const data = await response.json()
+      setUser(data)
+      Cookie.set('token', data.access_token)
+      return true
+    } catch (error) {
+      setError(error.message)
+      setIsLoading(false)
+      signout()
+      return false
     }
-    )
-    .finally(() => setIsLoading(false))
+  }
 
   const signout = () => {
     return new Promise(resolve => {
@@ -68,6 +81,7 @@ function useAuthProvider () {
     user,
     signin,
     signout,
-    isLoading
+    isLoading,
+    error
   }
 }

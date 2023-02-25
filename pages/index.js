@@ -1,8 +1,8 @@
 import Head from 'next/head'
+import endpoints from '../common/endpoints'
 import Pagination from '../components/Pagination/Pagination'
 import ProductsList from '../components/ProductsList/ProductsList'
 
-const URL = process.env.STORE_API_URL
 const limit = 2
 
 export async function getServerSideProps (context) {
@@ -12,11 +12,11 @@ export async function getServerSideProps (context) {
 
   let categoryObject = null
   if (category) {
-    const categoryResponse = await fetch(`${URL}/categories/${category}`)
-    productQuery = `${URL}/products?category=${category}&limit=${limit}&offset=${offset}`
+    const categoryResponse = await fetch(endpoints.categories.category(category))
+    productQuery = `${endpoints.products.products()}?category=${category}&limit=${limit}&offset=${offset}`
     categoryObject = await categoryResponse.json()
   } else {
-    productQuery = `${URL}/products?offset=${offset}&limit=${limit}`
+    productQuery = `${endpoints.products.products()}?offset=${offset}&limit=${limit}`
   }
 
   try {
@@ -47,7 +47,7 @@ export default function Home ({ category, products }) {
       </Head>
       {category && <h1 className='title'>{category.name}</h1>}
       <ProductsList products={products.data} />
-      <Pagination current={products.currentPage} total={products.totalPages} />
+      <Pagination total={products.totalPages} />
     </>
   )
 }

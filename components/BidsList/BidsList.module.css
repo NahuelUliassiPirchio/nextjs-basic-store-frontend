@@ -1,0 +1,14 @@
+.bidsList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 20px;
+  margin: 45px 20px;
+  max-width: 1500px;
+  min-height: 60vh;
+  padding-inline-start: 0px;
+}
+
+.bidsList li {
+  list-style: none;
+  padding: 10px;
+}

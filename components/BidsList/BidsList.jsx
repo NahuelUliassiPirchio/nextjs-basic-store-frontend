@@ -9,7 +9,7 @@ const BidsList = () => {
   const { list: bids, isLoading, error } = useGetList(`${URL}/bids?`, 1)
 
   return (
-    <ul className={styles.list}>
+    <ul className={styles.bidsList}>
       {
       isLoading
         ? <Loading />
