@@ -1,9 +1,27 @@
+.biddersTitle {
+  display: inline;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 1rem;
+}
+
+.biddersList {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem auto;
+  min-height: 30vh;
+  row-gap: 10px;
+}
+
 .bidder {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
-  max-width: 600px;
+  margin: 0 auto;
+  padding: 10px;
+  width: 90%;
+  background-color: #444;
 }
 
 .noBids {

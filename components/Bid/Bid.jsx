@@ -38,10 +38,10 @@ export default function Bid ({ bid }) {
 
   return (
     <>
-      <h3>Started on {initialDate.toDateString()}</h3>
       <Product product={bid.product} bidUp={bidUp} currentPrice={bid.currentPrice} />
       {bid.isActive && (
         <section className={styles.bidInfo}>
+          <h3>Started on {initialDate.toDateString()}</h3>
           <div className={styles.countdown}>
             <Countdown endDate={endDate} />
           </div>
@@ -58,26 +58,29 @@ function handleRefresh () {
 
 function biddersList (bidders) {
   if (bidders.length === 0) return <p className={styles.noBids}>No bids yet, you can be the first!</p>
-
+  bidders = bidders.sort((a, b) => b.bidAmount - a.bidAmount)
   return (
-    <ul className={styles.biddersList}>
+    <>
+      <h3 className={styles.biddersTitle}>Bidders</h3>
       <button className={styles.refreshButton} onClick={handleRefresh}>Refresh</button>
-      {
-        bidders.map((bidder) => {
-          console.log(bidder)
-          const bidDate = new Date(bidder.createdAt)
-          dayjs.extend(relativeTime)
-          const timePassedString = dayjs(bidDate).fromNow()
+      <ul className={styles.biddersList} id='bidders'>
+        {
+          bidders.map((bidder) => {
+            console.log(bidder)
+            const bidDate = new Date(bidder.createdAt)
+            dayjs.extend(relativeTime)
+            const timePassedString = dayjs(bidDate).fromNow()
 
-          return (
-            <li key={bidder.id} className={styles.bidder}>
-              <p>{bidder.user.name}</p>
-              <p>{timePassedString}</p>
-              <p>$ {bidder.bidAmount}</p>
-            </li>
-          )
-        })
-      }
-    </ul>
+            return (
+              <li key={bidder.id} className={styles.bidder}>
+                <p>{bidder.user.name}</p>
+                <p>{timePassedString}</p>
+                <p>$ {bidder.bidAmount}</p>
+              </li>
+            )
+          })
+        }
+      </ul>
+    </>
   )
 }

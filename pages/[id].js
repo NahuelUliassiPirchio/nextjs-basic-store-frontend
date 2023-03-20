@@ -4,8 +4,19 @@ import endpoints from '../common/endpoints'
 
 export async function getServerSideProps (context) {
   const { id } = context.query
-  const res = await fetch(endpoints.products.product(id))
-  const product = await res.json()
+  let product = null
+  try {
+    const res = await fetch(endpoints.products.product(id))
+    if (res.status === 404 || res.status === 500 || res.status === 400) {
+      return {
+        props: {
+          product: null
+        }
+      }
+    }
+    product = await res.json()
+  } catch (error) {
+  }
   return {
     props: {
       product
@@ -14,10 +25,13 @@ export async function getServerSideProps (context) {
 }
 
 export default function ProductDisplay ({ product }) {
+  console.log(product)
+  if (!product) {
+    return <h1 style={{ height: '80vh' }}>Something went wrong</h1>
+  }
   return (
     <>
       <Head>
-        {/* TODO: add brand */}
         <title>{`${product.name}`}</title>
       </Head>
       <Product product={product} />

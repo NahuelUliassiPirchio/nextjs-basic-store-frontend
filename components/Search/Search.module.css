@@ -1,13 +1,17 @@
+.searchContainer {
+  position: relative;
+}
+
 .searchResults {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100px;
+  width: 100%;
   min-height: 100px;
   position: absolute;
-  top: 8%;
-  left: 63%;
+  top: 1.5rem;
+  left: 0;
   background-color: #fff;
   color: black;
   width: auto;
@@ -15,7 +19,22 @@
 }
 
 .searchResults li {
+  width: 100%;
   list-style: none;
   padding: 10px;
   border-bottom: 1px solid #ccc;
+}
+
+.searchResults li:last-child {
+  border-bottom: none;
+}
+
+.searchResults li:hover {
+  background-color: #eee;
+}
+
+.searchResults li a {
+  width: 100%;
+  text-decoration: none;
+  color: black;
 }

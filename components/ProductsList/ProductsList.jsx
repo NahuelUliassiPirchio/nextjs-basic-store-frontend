@@ -2,6 +2,7 @@ import ProductItem from '../ProductItem/ProductItem'
 import styles from './ProductsList.module.css'
 
 export default function ProductsList ({ products }) {
+  if (!products) return null
   return (
     <ul className={styles.productsList}>
       {

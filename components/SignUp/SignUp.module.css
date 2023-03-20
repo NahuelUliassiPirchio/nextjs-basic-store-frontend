@@ -101,3 +101,9 @@
 .signUpForm a:disabled:active {
   color: #ccc;
 }
+
+.error {
+  color: red;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}

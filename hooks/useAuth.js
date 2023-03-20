@@ -47,6 +47,33 @@ function useAuthProvider () {
     }
   }
 
+  const signup = async (userInfo) => {
+    setIsLoading(true)
+    setError(null)
+
+    try {
+      const response = await fetch('http://localhost:3001/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(userInfo)
+      })
+
+      const data = await response.json()
+      console.log(data)
+      if (!response.ok) {
+        throw new Error(response.statusText || 'Something went wrong')
+      }
+      return data
+    } catch (error) {
+      setError(error)
+      setIsLoading(false)
+      signout()
+      return false
+    }
+  }
+
   const signout = () => {
     return new Promise(resolve => {
       setUser(false)
@@ -80,6 +107,7 @@ function useAuthProvider () {
   return {
     user,
     signin,
+    signup,
     signout,
     isLoading,
     error

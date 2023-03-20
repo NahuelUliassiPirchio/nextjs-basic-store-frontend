@@ -21,22 +21,18 @@ export default function NavBar () {
   return (
     <div className={styles.navbar}>
       <Link className={styles.logo} href='/'>
-        <Image
-          src='/next.svg'
-          alt='Next.js Logo'
-          width={180}
-          height={37}
-          priority
-        />
+        <h1>BSC</h1>
+        <h2>STORE</h2>
       </Link>
       <div className={styles.links}>
         <Link className={styles.link} href='/'>Home</Link>
-        <Link className={styles.link} href='#' onMouseEnter={() => setShowCategories(!showCategories)}> Categories</Link>
+        <Link className={`${styles.link} ${styles.categories}`} href='#' onMouseEnter={() => setShowCategories(true)}>
+          Categories
+          {showCategories && <CategoriesList setShowCategories={setShowCategories} />}
+        </Link>
         <Link className={styles.link} href='/bids'>Bids</Link>
         <Link className={styles.link} href='#'>About</Link>
-        <Link className={styles.link} href='#'>Contact</Link>
       </div>
-      {showCategories && <CategoriesList />}
       <Search />
       {user
         ? (

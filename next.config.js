@@ -8,6 +8,9 @@ const nextConfig = {
         hostname: '**'
       }
     ]
+  },
+  env: {
+    STORE_API_URL: process.env.STORE_API_URL
   }
 }
 

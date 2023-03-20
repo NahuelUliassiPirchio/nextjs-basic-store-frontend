@@ -9,13 +9,20 @@ export default function Search () {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch(`http://localhost:3001/products?name=${query}&hasBid=`, {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-      const fetchedData = await res.json()
-      setResults(fetchedData.data)
+      if (query.length < 1) {
+        return
+      }
+      try {
+        const res = await fetch(`http://localhost:3001/products?name=${query}&hasBid=`, {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        const fetchedData = await res.json()
+        setResults(fetchedData.data)
+      } catch (error) {
+        console.log(error)
+      }
     }
     fetchData()
   }, [query])
@@ -26,13 +33,13 @@ export default function Search () {
 
   return (
     <div className={styles.searchContainer}>
-      <input type='text' placeholder='Search...' onChange={onSearch} onFocus={() => setIsSearching(true)} onBlur={() => setIsSearching(false)} />
+      <input type='text' placeholder='Search...' onChange={onSearch} onFocus={() => setIsSearching(true)} onBlur={() => setTimeout(() => setIsSearching(false), 200)} />
       {isSearching && (
         <ul className={styles.searchResults}>
           {results.length > 0 && (
             results.map(result => (
               <li key={result.id}>
-                <Link href={`/${result.id}`}> {result.name} </Link>
+                <Link onClick={() => console.log('sale')} href={`/${result.id}`}> {result.name} </Link>
               </li>
             ))
           )}
