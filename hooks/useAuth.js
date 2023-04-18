@@ -1,7 +1,6 @@
 import { useState, useEffect, useContext, createContext } from 'react'
 import Cookie from 'js-cookie'
-
-const URL = 'http://localhost:3001/auth/login'
+import endpoints from '../common/endpoints'
 
 const AuthContext = createContext()
 
@@ -24,7 +23,7 @@ function useAuthProvider () {
     setError(null)
 
     try {
-      const response = await fetch(URL, {
+      const response = await fetch(endpoints.auth.login, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -52,22 +51,23 @@ function useAuthProvider () {
     setError(null)
 
     try {
-      const response = await fetch('http://localhost:3001/users', {
+      const response = await fetch(endpoints.auth.signup, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(userInfo)
       })
-
-      const data = await response.json()
-      console.log(data)
       if (!response.ok) {
         throw new Error(response.statusText || 'Something went wrong')
       }
-      return data
+
+      const data = await response.json()
+      setUser(data)
+      Cookie.set('token', data.access_token)
+      return true
     } catch (error) {
-      setError(error)
+      setError(error.message)
       setIsLoading(false)
       signout()
       return false
@@ -85,7 +85,7 @@ function useAuthProvider () {
   useEffect(() => {
     const token = Cookie.get('token')
     if (token) {
-      fetch('http://localhost:3001/profile', {
+      fetch(endpoints.profile, {
         headers: {
           Authorization: `Bearer ${token}`
         }

@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import styles from './Search.module.css'
+import endpoints from '../../common/endpoints'
 
 export default function Search () {
   const [query, setQuery] = useState('')
@@ -13,7 +14,7 @@ export default function Search () {
         return
       }
       try {
-        const res = await fetch(`http://localhost:3001/products?name=${query}&hasBid=`, {
+        const res = await fetch(`${endpoints.products.products}?name=${query}&hasBid=`, {
           headers: {
             'Content-Type': 'application/json'
           }

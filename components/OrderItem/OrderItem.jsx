@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { useState } from 'react'
 
 import styles from './OrderItem.module.css'
+import endpoints from '../../common/endpoints'
 
 export default function OrderItem ({ item }) {
   const [quantity, setQuantity] = useState(item.quantity)
@@ -10,7 +11,7 @@ export default function OrderItem ({ item }) {
   const token = Cookies.get('token')
 
   const handleOnDelete = async () => {
-    const res = await fetch(`http://localhost:3001/orders/${item.orderId}/order-items/${item.id}`, {
+    const res = await fetch(endpoints.orders.orderItems(item.orderId, item.id), {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -23,7 +24,7 @@ export default function OrderItem ({ item }) {
 
   const increaseQuantity = async (amount) => {
     if ((quantity + amount < 1) || quantity + amount > item.product.stock) return
-    const res = await fetch(`http://localhost:3001/orders/${item.orderId}/order-items/${item.id}`, {
+    const res = await fetch(endpoints.orders.orderItems(item.orderId, item.id), {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

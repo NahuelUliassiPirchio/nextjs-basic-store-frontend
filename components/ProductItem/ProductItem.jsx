@@ -14,8 +14,8 @@ export default function ProductItem ({ product, bid }) {
   }
 
   const bidCount = bidders ? bidders.length : 0
-  const actualPrice = bidders ? Math.max(...bidders.map(bid => bid.bidAmount)) : undefined
-  const price = bidders ? `Actual price: ${actualPrice}` : `$${product.price}`
+  const actualPrice = bidders?.length > 0 ? Math.max(...bidders.map(bid => bid.bidAmount)) : product.price
+  const price = bidders ? `Actual price: $${actualPrice}` : `$${product.price}`
 
   return (
     <div className={style.container} onClick={clickHandler}>

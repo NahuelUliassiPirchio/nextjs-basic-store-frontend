@@ -8,6 +8,7 @@ import Countdown from '../Countdown/Countdown'
 import Product from '../Product/Product'
 
 import styles from './Bid.module.css'
+import endpoints from '../../common/endpoints'
 
 export default function Bid ({ bid }) {
   const initialDate = new Date(bid.initialDate)
@@ -17,7 +18,7 @@ export default function Bid ({ bid }) {
   const bidUp = async (amount) => {
     if (!user) Router.push('/login')
     const token = Cookies.get('token')
-    const response = await fetch(`http://localhost:3001/bids/${bid.id}/bid-items`, {
+    const response = await fetch(endpoints.bids.bidItems(bid.id), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -35,7 +36,7 @@ export default function Bid ({ bid }) {
     }
     Router.reload()
   }
-
+  console.log(bid)
   return (
     <>
       <Product product={bid.product} bidUp={bidUp} currentPrice={bid.currentPrice} />

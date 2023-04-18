@@ -7,6 +7,7 @@ import Menu from '../Menu/Menu'
 import Search from '../Search/Search'
 
 import styles from './NavBar.module.css'
+import endpoints from '../../common/endpoints'
 
 export default function NavBar () {
   const { user, isLoading } = useAuth()
@@ -31,7 +32,7 @@ export default function NavBar () {
           {showCategories && <CategoriesList setShowCategories={setShowCategories} />}
         </Link>
         <Link className={styles.link} href='/bids'>Bids</Link>
-        <Link className={styles.link} href='#'>About</Link>
+        <Link className={styles.link} href={endpoints.about} target='_blank' rel='noreferrer'>About</Link>
       </div>
       <Search />
       {user

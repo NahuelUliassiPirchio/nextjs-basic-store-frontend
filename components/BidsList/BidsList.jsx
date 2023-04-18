@@ -2,11 +2,10 @@ import ProductItem from '../ProductItem/ProductItem'
 import useGetList from '../../hooks/useGetList'
 import Loading from '../Loading/Loading'
 import styles from './BidsList.module.css'
-
-const URL = 'http://localhost:3001'
+import endpoints from '../../common/endpoints'
 
 const BidsList = () => {
-  const { list: bids, isLoading, error } = useGetList(`${URL}/bids?isActive=true`, 1)
+  const { list: bids, isLoading, error } = useGetList(`${endpoints.bids.bids}?isActive=true`, 1)
 
   return (
     <ul className={styles.bidsList}>

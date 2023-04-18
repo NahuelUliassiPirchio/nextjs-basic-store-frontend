@@ -30,11 +30,10 @@ const endpoints = {
     allOrderItems: (id) => `${URL}/orders/${id}/order-items`,
     orders: `${URL}/orders`
   },
-  profile: {
-    profile: `${URL}/profile`
-  },
+  profile: `${URL}/profile`,
   auth: {
-    login: `${URL}/auth/login`
+    login: `${URL}/auth/login`,
+    signup: `${URL}/auth/signup`
   },
   products: {
     product: (id) => `${URL}/products/${id}`,
@@ -43,7 +42,8 @@ const endpoints = {
   categories: {
     category: (id) => `${URL}/categories/${id}`,
     categories: `${URL}/categories`
-  }
+  },
+  about: 'https://uliassipirchio.me/projects/basic-store'
 }
 
 export default endpoints

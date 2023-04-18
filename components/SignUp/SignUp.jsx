@@ -1,10 +1,10 @@
 import Router from 'next/router'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useAuth } from '../../hooks/useAuth'
 import styles from './SignUp.module.css'
 
 export default function SignUp () {
-  const { signup, error, signin } = useAuth()
+  const { signup, error } = useAuth()
   const [formError, setFormError] = useState(null)
 
   const handleSubmit = async (e) => {
@@ -19,7 +19,7 @@ export default function SignUp () {
       return setFormError('Passwords do not match')
     }
 
-    const data = await signup({
+    const success = await signup({
       email: email.value,
       password: password.value,
       name: name.value,
@@ -27,15 +27,16 @@ export default function SignUp () {
       phoneNumber: phone.value
     })
 
-    if (error) {
-      return setFormError(error.message)
-    }
-
-    const success = await signin(data.email, password.value)
     if (success) {
       return Router.push('/')
     }
   }
+
+  useEffect(() => {
+    if (error) {
+      setFormError(error)
+    }
+  }, [error])
 
   return (
     <div className={styles.signUpContainer}>
@@ -53,7 +54,7 @@ export default function SignUp () {
         <input type='password' name='password' id='password' />
         <label htmlFor='passwordConfirmation'>Password Confirmation</label>
         <input type='password' name='passwordConfirmation' id='passwordConfirmation' />
-        {formError && <p className={styles.error}>{formError.message}</p>}
+        {formError && <p className={styles.error}>{formError}</p>}
         <button className={styles.submitButton} type='submit'>Sign Up</button>
       </form>
     </div>

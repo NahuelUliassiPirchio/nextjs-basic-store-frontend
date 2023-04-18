@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import Cookies from 'js-cookie'
 import Loading from '../components/Loading/Loading'
 import Order from '../components/Order/Order'
+import endpoints from '../common/endpoints'
 
 export default function OrdersPage () {
   const [orders, setOrders] = useState([])
@@ -9,7 +10,7 @@ export default function OrdersPage () {
   useEffect(() => {
     async function fetchOrders () {
       const token = Cookies.get('token')
-      const res = await fetch('http://localhost:3001/orders?order=DESC', {
+      const res = await fetch(`${endpoints.orders.orders}?order=DESC`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
