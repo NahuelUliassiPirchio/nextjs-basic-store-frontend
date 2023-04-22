@@ -25,7 +25,6 @@ export async function getServerSideProps (context) {
 }
 
 export default function ProductDisplay ({ product }) {
-  console.log(product)
   if (!product) {
     return <h1 style={{ height: '80vh' }}>Something went wrong</h1>
   }

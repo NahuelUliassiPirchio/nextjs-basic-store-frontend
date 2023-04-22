@@ -7,9 +7,11 @@ export default function App ({ Component, pageProps }) {
   return (
     <>
       <AuthProvider>
-        <NavBar />
-        <Component {...pageProps} />
-        <Footer />
+        <div className='app-container'>
+          <NavBar />
+          <Component {...pageProps} />
+          <Footer />
+        </div>
       </AuthProvider>
     </>
   )

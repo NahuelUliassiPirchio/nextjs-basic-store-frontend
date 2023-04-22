@@ -1,18 +1,11 @@
-/* style an order item (product with price and quantity */
 .itemContainer {
   display: flex;
+  width: 100%;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   margin: 1rem 0;
   padding: 1rem;
-}
-
-.productContainer {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .deleteButton {
@@ -25,14 +18,28 @@
   margin-right: 1rem;
 }
 
+.productContainer {
+  display: grid;
+  grid-template-areas:
+    'image price'
+    '. name';
+}
+
 .productContainer img {
   width: 5rem;
   height: 5rem;
   margin-right: 1rem;
+  grid-area: 'image';
 }
 
 .productContainer h3 {
   margin-right: 1rem;
+  grid-area: 'name';
+}
+
+.productContainer p {
+  margin-right: 1rem;
+  grid-area: 'price';
 }
 
 .quantityPicker {
@@ -53,4 +60,11 @@
 
 .quantityPicker span {
   margin: 0 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .itemContainer {
+    margin: 0.5rem;
+    padding: 0.5rem;
+  }
 }

@@ -13,6 +13,7 @@ export default function NavBar () {
   const { user, isLoading } = useAuth()
 
   const [showMenu, setShowMenu] = useState(false)
+  const [showBurger, setShowBurger] = useState(false)
   const [showCategories, setShowCategories] = useState(false)
 
   const photoClickHandler = () => {
@@ -20,12 +21,17 @@ export default function NavBar () {
   }
 
   return (
-    <div className={styles.navbar}>
+    <header className={styles.navbar}>
+      <div className={`${styles.navIcon} ${showBurger && styles.open}`} onClick={() => setShowBurger(!showBurger)}>
+        <span />
+        <span />
+        <span />
+      </div>
       <Link className={styles.logo} href='/'>
         <h1>BSC</h1>
         <h2>STORE</h2>
       </Link>
-      <div className={styles.links}>
+      <div className={`${styles.links} ${showBurger && styles.display}`} onClick={() => setShowBurger(false)}>
         <Link className={styles.link} href='/'>Home</Link>
         <Link className={`${styles.link} ${styles.categories}`} href='#' onMouseEnter={() => setShowCategories(true)}>
           Categories
@@ -45,11 +51,11 @@ export default function NavBar () {
             )
           )
         : (
-          <div className={styles.buttons}>
+          <div className={styles.signButtons}>
             <Link href='/login' className={styles.login}>Login</Link>
             <Link href='/signup' className={styles.signUp}>Sign Up</Link>
           </div>
           )}
-    </div>
+    </header>
   )
 }

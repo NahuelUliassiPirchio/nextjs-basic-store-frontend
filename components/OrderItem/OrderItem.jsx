@@ -35,17 +35,16 @@ export default function OrderItem ({ item }) {
       })
     })
     const data = await res.json()
-    console.log(data)
     setQuantity(data.quantity)
   }
 
   return (
-    <div className={styles.itemContainer}>
+    <li className={styles.itemContainer}>
+      <button className={styles.deleteButton} onClick={handleOnDelete}>X</button>
       <div className={styles.productContainer}>
-        <button className={styles.deleteButton} onClick={handleOnDelete}>X</button>
         <Image src={item.product.image} alt={item.product.name} width={300} height={300} />
         <h3>{item.product.name}</h3>
-        <p>{item.product.price}</p>
+        <p>${item.product.price}</p>
       </div>
       <div className={styles.quantityPicker}>
         <button className={styles.lessButton} onClick={() => { increaseQuantity(-1) }}>-</button>
@@ -53,7 +52,7 @@ export default function OrderItem ({ item }) {
         <button className={styles.moreButton} onClick={() => increaseQuantity(1)}>+</button>
       </div>
 
-      <p className={styles.itemTotal}>{item.product.price * quantity}</p>
-    </div>
+      <p className={styles.itemTotal}>${item.product.price * quantity}</p>
+    </li>
   )
 }

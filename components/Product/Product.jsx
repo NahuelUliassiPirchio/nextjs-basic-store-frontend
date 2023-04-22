@@ -55,7 +55,6 @@ export default function Product ({ product, bidUp, currentPrice }) {
       if (res.ok) {
         return res.json()
       }
-      console.log(res)
       throw new Error('Something went wrong')
     })
       .catch(err => {

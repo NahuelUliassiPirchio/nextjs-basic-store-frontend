@@ -36,7 +36,6 @@ export default function Bid ({ bid }) {
     }
     Router.reload()
   }
-  console.log(bid)
   return (
     <>
       <Product product={bid.product} bidUp={bidUp} currentPrice={bid.currentPrice} />
@@ -67,7 +66,6 @@ function biddersList (bidders) {
       <ul className={styles.biddersList} id='bidders'>
         {
           bidders.map((bidder) => {
-            console.log(bidder)
             const bidDate = new Date(bidder.createdAt)
             dayjs.extend(relativeTime)
             const timePassedString = dayjs(bidDate).fromNow()
