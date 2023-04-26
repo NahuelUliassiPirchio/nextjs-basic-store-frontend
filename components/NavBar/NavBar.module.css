@@ -44,6 +44,7 @@
   font-size: 1rem;
   font-weight: 500;
   margin-right: 15px;
+  cursor: pointer;
 }
 
 .link:hover {
@@ -52,6 +53,8 @@
 
 .categories {
   position: relative;
+  display: flex;
+  align-items: baseline;
 }
 
 .search input {
@@ -173,7 +176,7 @@
     z-index: 1;
     transition: all 0.5s ease;
   }
-  .links a {
+  .links > .link {
     margin: 0;
     padding: 1rem;
     font-size: 1.5rem;
@@ -181,6 +184,10 @@
   }
   .links {
     display: none;
+  }
+  .categories  {
+    display: grid;
+    grid-template-columns: 8fr 1fr;
   }
   .logo {
     display: none;

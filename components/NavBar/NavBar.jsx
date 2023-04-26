@@ -31,15 +31,19 @@ export default function NavBar () {
         <h1>BSC</h1>
         <h2>STORE</h2>
       </Link>
-      <div className={`${styles.links} ${showBurger && styles.display}`} onClick={() => setShowBurger(false)}>
-        <Link className={styles.link} href='/'>Home</Link>
-        <Link className={`${styles.link} ${styles.categories}`} href='#' onMouseEnter={() => setShowCategories(true)}>
+      <nav className={`${styles.links} ${showBurger && styles.display}`}>
+        <Link className={styles.link} href='/' onClick={() => setShowBurger(false)}>Home</Link>
+        <div
+          className={`${styles.link} ${styles.categories} ${showCategories && styles.active}}`}
+          onClick={() => setShowCategories(!showCategories)}
+        >
           Categories
+          <Image src='/expand-arrow.svg' alt='expand arrow' width={15} height={15} />
           {showCategories && <CategoriesList setShowCategories={setShowCategories} />}
-        </Link>
-        <Link className={styles.link} href='/bids'>Bids</Link>
-        <Link className={styles.link} href={endpoints.about} target='_blank' rel='noreferrer'>About</Link>
-      </div>
+        </div>
+        <Link className={styles.link} href='/bids' onClick={() => setShowBurger(false)}>Bids</Link>
+        <Link className={styles.link} href={endpoints.about} target='_blank' rel='noreferrer' onClick={() => setShowBurger(false)}>About</Link>
+      </nav>
       <Search />
       {user
         ? (

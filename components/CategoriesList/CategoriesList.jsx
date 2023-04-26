@@ -6,7 +6,6 @@ import styles from './CategoriesList.module.css'
 export default function CategoriesList ({ setShowCategories }) {
   const { data: categories, isLoading } = useFetchData({ url: endpoints.categories.categories, method: 'GET' })
 
-  if (isLoading) return <p>Loading...</p>
   if (!categories) return null
   return (
     <div
@@ -15,13 +14,17 @@ export default function CategoriesList ({ setShowCategories }) {
       onMouseEnter={() => setShowCategories(true)}
     >
       <ul className={styles.categoriesList}>
-        {categories.map(category => (
-          <li key={category.id}>
-            <Link href={`/?category=${category.id}`} className={styles.category}>
-              {category.name}
-            </Link>
-          </li>
-        ))}
+        {
+          isLoading
+            ? <p>Loading...</p>
+            : categories.map(category => (
+              <li key={category.id}>
+                <Link href={`/?category=${category.id}`} className={styles.category}>
+                  {category.name}
+                </Link>
+              </li>
+            ))
+        }
       </ul>
     </div>
   )
