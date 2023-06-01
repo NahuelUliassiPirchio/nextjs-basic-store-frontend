@@ -19,7 +19,15 @@ export default function CategoriesList ({ setShowCategories }) {
             ? <p>Loading...</p>
             : categories.map(category => (
               <li key={category.id}>
-                <Link href={`/?category=${category.id}`} className={styles.category}>
+                <Link
+                  href={
+                  {
+                    query: {
+                      category: category.id
+                    }
+                  }
+                } className={styles.category}
+                >
                   {category.name}
                 </Link>
               </li>

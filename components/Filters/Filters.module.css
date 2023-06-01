@@ -1,0 +1,6 @@
+.filtersContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    padding: 1rem 0;
+}

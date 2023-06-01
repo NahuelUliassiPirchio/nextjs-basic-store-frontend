@@ -3,6 +3,7 @@ import styles from './ProductsList.module.css'
 
 export default function ProductsList ({ products }) {
   if (!products) return null
+  if (products.length === 0) return <h1>No products found</h1>
   return (
     <ul className={styles.productsList}>
       {

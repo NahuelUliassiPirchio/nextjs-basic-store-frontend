@@ -3,25 +3,40 @@ import endpoints from '../common/endpoints'
 import Advertisement from '../components/Advertisement/Advertisement'
 import Pagination from '../components/Pagination/Pagination'
 import ProductsList from '../components/ProductsList/ProductsList'
+import Filters from '../components/Filters/Filters'
 
 const limit = 2
 
 export async function getServerSideProps (context) {
-  const { category, page } = context.query
+  const { category, page, minPrice, maxPrice } = context.query
   const offset = (page - 1) * limit || 0
-  let productQuery = ''
+  let categoryReq = null
+  let productQuery = `${endpoints.products.products}?limit=${limit}&offset=${offset}&hasBid=`
 
   let categoryObject = null
   if (category) {
-    const categoryResponse = await fetch(endpoints.categories.category(category))
-    productQuery = `${endpoints.products.products}?categoryId=${category}&limit=${limit}&offset=${offset}&hasBid=`
-    categoryObject = await categoryResponse.json()
-  } else {
-    productQuery = `${endpoints.products.products}?offset=${offset}&limit=${limit}&hasBid=`
+    productQuery += `&categoryId=${category}`
+    categoryReq = fetch(`${endpoints.categories.categories}/${category}`)
   }
+
+  if (minPrice) {
+    productQuery += `&minPrice=${minPrice}`
+  }
+
+  if (maxPrice) {
+    productQuery += `&maxPrice=${maxPrice}`
+  }
+
   try {
-    const productsResponse = await fetch(productQuery)
-    const products = await productsResponse.json()
+    const productsReq = fetch(productQuery)
+    const [productsRes, categoryRes] = await Promise.all([productsReq, categoryReq])
+    const products = await productsRes.json()
+
+    if (categoryRes) {
+      const category = await categoryRes.json()
+      categoryObject = category
+    }
+
     return {
       props: {
         category: categoryObject,
@@ -49,6 +64,7 @@ export default function Home ({ category, products }) {
       <Head>
         <title>Home</title>
       </Head>
+      <Filters />
       {category && <h1 className='title'>{category.name}</h1>}
       <ProductsList products={products.data} />
       <Pagination total={products.totalPages} />
