@@ -8,7 +8,7 @@ import Filters from '../components/Filters/Filters'
 const limit = 2
 
 export async function getServerSideProps (context) {
-  const { category, page, minPrice, maxPrice } = context.query
+  const { category, page, minPrice, maxPrice, order } = context.query
   const offset = (page - 1) * limit || 0
   let categoryReq = null
   let productQuery = `${endpoints.products.products}?limit=${limit}&offset=${offset}&hasBid=`
@@ -25,6 +25,10 @@ export async function getServerSideProps (context) {
 
   if (maxPrice) {
     productQuery += `&maxPrice=${maxPrice}`
+  }
+
+  if (order) {
+    productQuery += `&order=${order}`
   }
 
   try {
