@@ -38,7 +38,7 @@ export default function NavBar () {
           onClick={() => setShowCategories(!showCategories)}
         >
           Categories
-          <Image src='/expand-arrow.svg' alt='expand arrow' width={15} height={15} />
+          <Image src='/icons/expand-arrow.svg' alt='expand arrow' width={15} height={15} />
           {showCategories && <CategoriesList setShowCategories={setShowCategories} />}
         </div>
         <Link className={styles.link} href='/bids' onClick={() => setShowBurger(false)}>Bids</Link>
