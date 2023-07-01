@@ -5,7 +5,7 @@ import Pagination from '../components/Pagination/Pagination'
 import ProductsList from '../components/ProductsList/ProductsList'
 import Filters from '../components/Filters/Filters'
 
-const limit = 2
+const limit = 10
 
 export async function getServerSideProps (context) {
   const { category, page, minPrice, maxPrice, order } = context.query

@@ -1,20 +1,32 @@
+import { useState } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
+
 import endpoints from '../../common/endpoints'
 import useFetchData from '../../hooks/useFetch'
 import styles from './CategoriesList.module.css'
+import OutsideAlerter from '../../utils/OutsideAlerter'
 
-export default function CategoriesList ({ setShowCategories }) {
+export default function CategoriesList () {
   const { data: categories, isLoading } = useFetchData({ url: endpoints.categories.categories, method: 'GET' })
+  const [showCategories, setShowCategories] = useState(false)
 
   if (!categories) return null
   return (
-    <div
-      className={styles.categories}
-      onMouseLeave={() => setShowCategories(false)}
-      onMouseEnter={() => setShowCategories(true)}
-    >
-      <ul className={styles.categoriesList}>
-        {
+    <OutsideAlerter callback={() => setShowCategories(false)}>
+      <div
+        className={`${styles.linkContainer} ${styles.categoriesTitle} ${showCategories && styles.active}}`}
+        onClick={() => setShowCategories(!showCategories)}
+      >
+        Categories
+        <Image src='/icons/expand-arrow.svg' alt='expand arrow' width={15} height={15} />
+
+        {showCategories && (
+          <div
+            className={styles.categories}
+          >
+            <ul className={styles.categoriesList}>
+              {
           isLoading
             ? <p>Loading...</p>
             : categories.map(category => (
@@ -33,7 +45,10 @@ export default function CategoriesList ({ setShowCategories }) {
               </li>
             ))
         }
-      </ul>
-    </div>
+            </ul>
+          </div>
+        )}
+      </div>
+    </OutsideAlerter>
   )
 }

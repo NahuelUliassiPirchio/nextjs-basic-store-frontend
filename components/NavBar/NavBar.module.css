@@ -51,12 +51,6 @@
   color: gray;
 }
 
-.categories {
-  position: relative;
-  display: flex;
-  align-items: baseline;
-}
-
 .search input {
   width: 15rem;
   height: 1.5rem;
@@ -103,14 +97,6 @@
   background-color: rgb(119, 110, 110);
   color: #FFF;
   border: none;
-}
-
-.user img {
-  width: 2rem;
-  height: 2rem;
-  margin-right: 2rem;
-  border-radius: 50%;
-  cursor: pointer;
 }
 
 @media (max-width: 768px) {
