@@ -1,8 +1,17 @@
 .footer {
+    display: flex;
+    flex-direction: row;
     width: 100%;
-    background-color: #f5f5f5;
+    color: #fff;
+    background-color: #282c34;
     padding: 20px;
     text-align: center;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.footerSection ul{
+    list-style: none;
 }
 
 .footer a {
@@ -13,4 +22,11 @@
 .footer a:hover {
     color: #61dafb;
     text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .footer {
+        flex-direction: column;
+        gap: 20px;
+    }
 }

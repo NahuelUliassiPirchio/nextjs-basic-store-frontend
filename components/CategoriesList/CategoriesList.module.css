@@ -5,6 +5,7 @@
 }
 
 .categories {
+  z-index: 100;
   position: absolute;
   top: 2rem;
   left: -1rem;
@@ -22,7 +23,7 @@
   cursor: pointer;
 }
 
-.link:hover {
+.linkContainer:hover {
   color: gray;
 }
 

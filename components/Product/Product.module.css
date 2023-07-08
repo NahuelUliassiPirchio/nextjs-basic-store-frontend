@@ -5,12 +5,10 @@
   justify-content: space-between;
   max-width: 800px;
   min-width: 280px;
-  margin-top: 50px;
-  margin-bottom: 50px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 1.5rem auto;
   padding: 1rem;
-  background-color: rgb(64, 58, 58);
+  border: 1px solid #c7c095;
+  border-radius: 5px;
 }
 
 .productImage {
@@ -27,7 +25,6 @@
   height: 100%;
   object-fit: contain;
 }
-
 .productInfo {
   flex: 1 1 300px;
   min-height: 3rem;
@@ -40,13 +37,18 @@
   padding-left: 0.5rem;
 }
 
+.brand {
+  font-size: 1rem;
+  padding-left: 0.65rem;
+  font-weight: light;
+}
+
 .description {
   height: 25%;
   margin: 0.75rem;
 }
 
 .price {
-  color: #c7c095;
   font-weight: bold;
   font-size: 1.5rem;
   padding-left: 0.5rem;
@@ -55,7 +57,7 @@
 
 .addToOrderButton {
   background-color: #c7c095;
-  color: #000;
+  color: var(--color-text);
   font-weight: bold;
   border: none;
   border-radius: 5px;
@@ -64,7 +66,12 @@
   cursor: pointer;
 }
 
-/* .bidUp is a container of buttons that are used to bid up the price and an input field to enter a bid */
+.addToOrderButton:hover {
+  background-color: white;
+  color: #c7c095;
+  border: 1px solid #c7c095;
+}
+
 .bidUp {
   display: flex;
   flex-direction: row;

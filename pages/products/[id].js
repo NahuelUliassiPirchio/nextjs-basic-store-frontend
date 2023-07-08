@@ -1,6 +1,6 @@
 import Head from 'next/head'
-import Product from '../components/Product/Product'
-import endpoints from '../common/endpoints'
+import Product from '../../components/Product/Product'
+import endpoints from '../../common/endpoints'
 
 export async function getServerSideProps (context) {
   const { id } = context.query

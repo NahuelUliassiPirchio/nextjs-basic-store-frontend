@@ -26,7 +26,7 @@ export default function Search () {
         const fetchedData = await res.json()
         setResults(fetchedData.data)
       } catch (error) {
-        console.log(error)
+        console.log(error) // TODO: handle error
       }
     }
     fetchData()

@@ -76,6 +76,7 @@ export default function Product ({ product, bidUp, currentPrice }) {
       <div className={styles.productInfo}>
         {error && <p className={styles.error}>{error.message}</p>}
         <h1 className={styles.name}>{product.name}</h1>
+        <p className={styles.brand}>{product.brand.name}</p>
         <p className={styles.description}>{product.description}</p>
         {
           bidUp

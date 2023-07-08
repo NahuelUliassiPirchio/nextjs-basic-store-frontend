@@ -12,7 +12,6 @@ export async function getServerSideProps (context) {
   const offset = (page - 1) * limit || 0
   let categoryReq = null
   let productQuery = `${endpoints.products.products}?limit=${limit}&offset=${offset}&hasBid=`
-
   let categoryObject = null
   if (category) {
     productQuery += `&categoryId=${category}`
@@ -48,7 +47,7 @@ export async function getServerSideProps (context) {
       }
     }
   } catch (error) {
-    console.log(error)
+    console.log(error) // TODO: handle error
   }
 
   return {

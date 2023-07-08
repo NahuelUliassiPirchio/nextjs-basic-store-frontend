@@ -9,7 +9,7 @@ export default function ProductItem ({ product, bid }) {
     if (bidders) {
       router.push(`/bids/${bid.id}`)
     } else {
-      router.push(`/${product.id}`)
+      router.push(`/products/${product.id}`)
     }
   }
 
@@ -18,19 +18,22 @@ export default function ProductItem ({ product, bid }) {
   const price = bidders ? `Actual price: $${actualPrice}` : `$${product.price}`
 
   return (
-    <div className={style.container} onClick={clickHandler}>
-      <div className={style.image}>
-        <Image src={product.image} alt={product.name} width={300} height={300} />
+    <div className={style.productCard} onClick={clickHandler}>
+      <div className={style.imagesContainer}>
+        <Image className={style.productImg} src={product.image} alt={`${product.name}'s image`} width={200} height={200} />
+        <Image className={style.brandLogo} src={product.brand.logo} alt={`${product.brand.name}'s image`} width={50} height={50} title={product.brand.name} />
       </div>
-      <div className={style.details}>
-        <h3>{product.name}</h3>
-        {bidders && (
-          <>
-            <p className={style.bids}>Bids: {bidCount}</p>
-            <p className={style.price}>Initial price: ${product.price}</p>
-          </>
-        )}
-        <p className={style.price}>{price}</p>
+      <div className={style.productInfo}>
+        <div>
+          <p>{product.name} - {product.brand.name}</p>
+          <p>{price}</p>
+        </div>
+        <div className={style.bidCount}>
+          <p>{bidCount} bids</p>
+        </div>
+        <figure>
+          <Image src='./icons/add-to-cart.svg' alt='Add to cart' width={30} height={30} />
+        </figure>
       </div>
     </div>
   )

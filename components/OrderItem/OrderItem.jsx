@@ -19,7 +19,7 @@ export default function OrderItem ({ item }) {
       }
     })
     const data = await res.json()
-    console.log(data)
+    console.log(data) // TODO: handle delete and error
   }
 
   const increaseQuantity = async (amount) => {
