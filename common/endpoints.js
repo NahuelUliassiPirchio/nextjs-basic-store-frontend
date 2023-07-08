@@ -16,6 +16,9 @@
  *
  * /categories/:id
  * /categories
+ *
+ * /brands
+ * /brands/:id
  */
 
 const URL = process.env.STORE_API_URL || 'http://localhost:3001'
@@ -37,11 +40,16 @@ const endpoints = {
   },
   products: {
     product: (id) => `${URL}/products/${id}`,
-    products: `${URL}/products`
+    products: `${URL}/products`,
+    brandProducts: (id) => `${URL}/products?brandId=${id}`
   },
   categories: {
     category: (id) => `${URL}/categories/${id}`,
     categories: `${URL}/categories`
+  },
+  brands: {
+    brand: (id) => `${URL}/brands/${id}`,
+    brands: `${URL}/brands`
   },
   about: 'https://uliassipirchio.me/projects/basic-store'
 }
