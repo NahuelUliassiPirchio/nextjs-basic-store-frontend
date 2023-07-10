@@ -4,8 +4,14 @@ import Link from 'next/link'
 
 import style from './ProductItem.module.css'
 
+import { useCartStore } from '../../store/cartStore'
+import useStore from '../../hooks/useStore'
+
 export default function ProductItem ({ product, bid }) {
   const router = useRouter()
+  const { addToCart, removeFromCart } = useCartStore()
+  const cart = useStore(useCartStore, (state) => state.cart) || []
+
   const bidders = bid && bid.bidders
   const clickHandler = () => {
     if (bidders) {
@@ -13,6 +19,11 @@ export default function ProductItem ({ product, bid }) {
     } else {
       router.push(`/products/${product.id}`)
     }
+  }
+
+  const handleAddToCart = (e) => {
+    e.stopPropagation()
+    if (cart.find(item => item.id === product.id)) { removeFromCart(product) } else { addToCart(product) }
   }
 
   const bidCount = bidders ? bidders.length : 0
@@ -41,7 +52,15 @@ export default function ProductItem ({ product, bid }) {
           )
         }
         <figure>
-          <Image src='/icons/add-to-cart.svg' alt='Add to cart' width={30} height={30} />
+          {
+            cart.find(item => item.id === product.id)
+              ? (
+                <Image src='/icons/added-to-cart.svg' alt='Remove from cart' width={50} height={50} onClick={handleAddToCart} />
+                )
+              : (
+                <Image src='/icons/add-to-cart.svg' alt='Add to cart' width={50} height={50} onClick={handleAddToCart} />
+                )
+          }
         </figure>
       </div>
     </div>
