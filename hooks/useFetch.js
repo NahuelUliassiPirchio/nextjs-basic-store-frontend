@@ -6,6 +6,7 @@ function useFetchData ({ url, method = 'GET', body }) {
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
+    if (!(body && method && body)) return
     setIsLoading(true)
     fetch(url, {
       method,

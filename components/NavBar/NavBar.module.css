@@ -62,7 +62,7 @@
 .signButtons {
   display: flex;
   flex-direction: row;
-  margin-right: 50px;
+  margin-right: 1rem;
   gap: 1rem;
 }
 

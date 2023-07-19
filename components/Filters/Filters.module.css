@@ -38,6 +38,11 @@
     padding: .35rem;
 }
 
+.filterButton:hover {
+    background-color: black;
+    color: white;
+}
+
 .cleanFiltersButton {
     border: none;
     cursor: pointer;

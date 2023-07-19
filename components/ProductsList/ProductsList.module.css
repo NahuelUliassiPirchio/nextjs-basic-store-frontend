@@ -1,8 +1,15 @@
+.productsListContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 .productsList {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-gap: 1rem;
-  margin: 20px auto;
+  margin: 20px 0;
+  align-self: center;
   max-width: 1500px;
   padding: .5rem;
 }
@@ -20,5 +27,6 @@
   .productsList {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     margin: 0;
+    align-self: normal;
   }
 }

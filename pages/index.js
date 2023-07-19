@@ -4,7 +4,6 @@ import Advertisement from '../components/Advertisement/Advertisement'
 import Pagination from '../components/Pagination/Pagination'
 import ProductsList from '../components/ProductsList/ProductsList'
 import Filters from '../components/Filters/Filters'
-import Cart from '../components/Cart/Cart'
 
 const limit = 10
 
@@ -69,7 +68,6 @@ export default function Home ({ category, products }) {
         <title>Home</title>
       </Head>
       <Filters />
-      <Cart />
       {category && <h1 className='title'>{category.name}</h1>}
       <ProductsList products={products.data} />
       <Pagination total={products.totalPages} />

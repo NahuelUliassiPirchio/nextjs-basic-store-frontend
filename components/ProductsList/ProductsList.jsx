@@ -5,14 +5,16 @@ export default function ProductsList ({ products }) {
   if (!products) return null
   if (products.length === 0) return <h1>No products found</h1>
   return (
-    <ul className={styles.productsList}>
-      {
+    <section className={styles.productsListContainer}>
+      <ul className={styles.productsList}>
+        {
         products?.map(product =>
           <li key={product.id} className={styles.productItem}>
             <ProductItem key={product.id} product={product} />
           </li>
         )
       }
-    </ul>
+      </ul>
+    </section>
   )
 }

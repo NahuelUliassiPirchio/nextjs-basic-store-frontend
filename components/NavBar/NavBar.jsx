@@ -5,6 +5,7 @@ import { useAuth } from '../../hooks/useAuth'
 import CategoriesList from '../CategoriesList/CategoriesList'
 import Menu from '../Menu/Menu'
 import Search from '../Search/Search'
+import Cart from '../Cart/Cart'
 
 import styles from './NavBar.module.css'
 import endpoints from '../../common/endpoints'
@@ -21,7 +22,7 @@ export default function NavBar () {
         <span />
         <span />
       </div>
-      <Link className={styles.logo} href='/'>
+      <Link className={styles.logo} passHref href='/'>
         <h1>BSC</h1>
         <h2>STORE</h2>
       </Link>
@@ -32,6 +33,7 @@ export default function NavBar () {
         <Link className={styles.link} href={endpoints.about} target='_blank' rel='noreferrer' onClick={() => setShowBurger(false)}>About</Link>
       </nav>
       <Search />
+      <Cart />
       {user
         ? (
             !isLoading && (

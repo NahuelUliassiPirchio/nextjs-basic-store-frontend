@@ -34,7 +34,7 @@ export default function ProductItem ({ product, bid }) {
     <div className={style.productCard} onClick={clickHandler}>
       <div className={style.imagesContainer}>
         <Image className={style.productImg} src={product.image} alt={`${product.name}'s image`} width={200} height={200} />
-        <Link href={`/brands/${product.brand.id}`} onClick={e => e.stopPropagation()}>
+        <Link href={`/brands/${product.brand.id}`} passHref onClick={e => e.stopPropagation()}>
           <Image className={style.brandLogo} src={product.brand.logo} alt={`${product.brand.name}'s image`} width={50} height={50} title={product.brand.name} />
         </Link>
       </div>
@@ -55,10 +55,10 @@ export default function ProductItem ({ product, bid }) {
           {
             cart.find(item => item.id === product.id)
               ? (
-                <Image src='/icons/added-to-cart.svg' alt='Remove from cart' width={50} height={50} onClick={handleAddToCart} />
+                <Image src='/icons/added-to-cart.svg' alt='Remove from cart' width={50} height={50} onClick={handleAddToCart} title='Remove From Cart' />
                 )
               : (
-                <Image src='/icons/add-to-cart.svg' alt='Add to cart' width={50} height={50} onClick={handleAddToCart} />
+                <Image src='/icons/add-to-cart.svg' alt='Add to cart' width={50} height={50} onClick={handleAddToCart} title='Add To Cart' />
                 )
           }
         </figure>

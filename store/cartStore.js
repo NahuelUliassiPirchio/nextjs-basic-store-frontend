@@ -7,6 +7,13 @@ export const useCartStore = create(
       cart: [],
       totalItems: 0,
       totalPrice: 0,
+      clearCart: () => {
+        set(state => ({
+          cart: [],
+          totalItems: 0,
+          totalPrice: 0
+        }))
+      },
       addToCart: (product) => {
         const cart = get().cart
         const cartItem = cart.find(item => item.id === product.id)

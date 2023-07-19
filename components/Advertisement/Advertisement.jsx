@@ -19,7 +19,7 @@ export default function Advertisement () {
   return (
     show && (
       <section className={styles.advertisement}>
-        <h2>WARINING!</h2>
+        <h2>Advertisement!</h2>
         <button className={styles.close} onClick={closeHandler}>X</button>
         <p>
           THIS PAGE HAS BEEN MADE FOR EDUCATIONAL PURPOSES ONLY. IT IS NOT A REAL E-COMMERCE WEBSITE.
