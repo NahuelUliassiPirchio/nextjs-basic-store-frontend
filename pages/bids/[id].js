@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Bid from '../../components/Bid/Bid'
+import { AuthProvider } from '../../hooks/useAuth'
 import endpoints from '../../common/endpoints'
 
 export async function getServerSideProps (context) {
@@ -19,7 +20,9 @@ export default function BidDisplay ({ bid }) {
       <Head>
         <title>Hurry! {bid.product.name}</title>
       </Head>
-      <Bid bid={bid} />
+      <AuthProvider>
+        <Bid bid={bid} />
+      </AuthProvider>
     </>
   )
 }

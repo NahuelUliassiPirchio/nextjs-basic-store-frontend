@@ -1,6 +1,7 @@
 
 import Head from 'next/head'
 import Login from '../components/Login/Login'
+import { AuthProvider } from '../hooks/useAuth'
 
 export default function LoginPage () {
   return (
@@ -8,8 +9,9 @@ export default function LoginPage () {
       <Head>
         <title>Login</title>
       </Head>
-
-      <Login />
+      <AuthProvider>
+        <Login />
+      </AuthProvider>
     </>
   )
 }

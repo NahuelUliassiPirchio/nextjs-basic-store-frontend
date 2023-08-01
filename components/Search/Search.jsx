@@ -61,9 +61,7 @@ export default function Search () {
           <ul className={styles.searchResults}>
             {results?.length > 0 && (
               results.map(result => (
-                <li key={result.id}>
-                  <Link href={`/${result.id}`}> {result.name} </Link>
-                </li>
+                <Link key={result.id} href={`products/${result.id}`}> {result.name} </Link>
               ))
             )}
           </ul>

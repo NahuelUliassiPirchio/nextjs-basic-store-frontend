@@ -6,7 +6,8 @@ function useFetchData ({ url, method = 'GET', body }) {
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
-    if (!(body && method && body)) return
+    if (!url) return
+    console.log('siguio')
     setIsLoading(true)
     fetch(url, {
       method,

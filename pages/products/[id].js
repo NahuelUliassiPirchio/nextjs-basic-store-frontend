@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Product from '../../components/Product/Product'
 import endpoints from '../../common/endpoints'
+import { AuthProvider } from '../../hooks/useAuth'
 
 export async function getServerSideProps (context) {
   const { id } = context.query
@@ -33,7 +34,9 @@ export default function ProductDisplay ({ product }) {
       <Head>
         <title>{`${product.name}`}</title>
       </Head>
-      <Product product={product} />
+      <AuthProvider>
+        <Product product={product} />
+      </AuthProvider>
     </>
   )
 }

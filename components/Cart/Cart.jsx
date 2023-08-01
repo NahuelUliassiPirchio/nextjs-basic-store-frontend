@@ -83,15 +83,16 @@ export default function Cart () {
           <div className={styles.cartContainer}>
             <h2>Cart</h2>
             <ul className={styles.cartList}>
-              {cart?.map((product) => (
-                <li key={product.id} className={styles.cartItem}>
-                  <Image src={product.image} alt={product.name} width={50} height={50} />
-                  <h3>{product.name} - {product.brand.name}</h3>
-                  <p>+${product.price}</p>
-                  <div className={styles.quantityHandler}>
-                    <button onClick={e => handleUpdateQuantity(e, product, +1)}>+</button>
-                    <p>{product.quantity}</p>
-                    {
+              {(cart && cart?.length > 0)
+                ? cart?.map((product) => (
+                  <li key={product.id} className={styles.cartItem}>
+                    <Image src={product.image} alt={product.name} width={50} height={50} />
+                    <h3>{product.name} - {product.brand.name}</h3>
+                    <p>+${product.price}</p>
+                    <div className={styles.quantityHandler}>
+                      <button onClick={e => handleUpdateQuantity(e, product, +1)}>+</button>
+                      <p>{product.quantity}</p>
+                      {
                       product.quantity === 1
                         ? (
                           <Image src='/icons/clear.svg' alt='Remove item button' width={15} height={15} title='Remove this item from the cart' onClick={() => removeFromCart(product)} />
@@ -100,9 +101,12 @@ export default function Cart () {
                           <button onClick={e => handleUpdateQuantity(e, product, -1)}>-</button>
                           )
                     }
-                  </div>
-                </li>
-              ))}
+                    </div>
+                  </li>
+                ))
+                : (
+                  <div>This looks pretty empty</div>
+                  )}
             </ul>
             <p className={styles.total}>Total: ${totalPrice}</p>
             <button className={styles.orderButton} disabled={loading} onClick={handelPlaceOrder}>{

@@ -4,8 +4,10 @@ import { useRef } from 'react'
 import Loading from '../Loading/Loading'
 import endpoints from '../../common/endpoints'
 import styles from './ProfileInfo.module.css'
+import { useAuth } from '../../hooks/useAuth'
 
-export default function ProfileInfo ({ user }) {
+export default function ProfileInfo () {
+  const { user } = useAuth()
   const nameRef = useRef()
   const emailRef = useRef()
   const addressRef = useRef()

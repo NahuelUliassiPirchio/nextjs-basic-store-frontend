@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -7,11 +7,12 @@ import useFetchData from '../../hooks/useFetch'
 import styles from './CategoriesList.module.css'
 import OutsideAlerter from '../../utils/OutsideAlerter'
 
-export default function CategoriesList () {
+function CategoriesList () {
   const { data: categories, isLoading } = useFetchData({ url: endpoints.categories.categories, method: 'GET' })
   const [showCategories, setShowCategories] = useState(false)
+  console.log(categories)
 
-  if (!categories) return null
+  if (!categories && !isLoading) return null
   return (
     <OutsideAlerter callback={() => setShowCategories(false)}>
       <div
@@ -52,3 +53,5 @@ export default function CategoriesList () {
     </OutsideAlerter>
   )
 }
+
+export default memo(CategoriesList)
