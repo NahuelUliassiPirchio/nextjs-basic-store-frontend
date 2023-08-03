@@ -6,6 +6,7 @@ import Router from 'next/router'
 import { useAuth } from '../../hooks/useAuth'
 import styles from './Product.module.css'
 import endpoints from '../../common/endpoints'
+import { formatPrice } from '../../utils/formatters'
 
 export default function Product ({ product, bidUp, currentPrice }) {
   const { user } = useAuth()
@@ -75,8 +76,8 @@ export default function Product ({ product, bidUp, currentPrice }) {
       </div>
       <div className={styles.productInfo}>
         {error && <p className={styles.error}>{error.message}</p>}
-        <h1 className={styles.name}>{product.name}</h1>
         <p className={styles.brand}>{product.brand.name}</p>
+        <h1 className={styles.name}>{product.name}</h1>
         <p className={styles.description}>{product.description}</p>
         {
           bidUp
@@ -95,7 +96,7 @@ export default function Product ({ product, bidUp, currentPrice }) {
               )
             : (
               <>
-                <p className={styles.price}>${product.price}</p>
+                <p className={styles.price}>${formatPrice(product.price)}</p>
                 <button className={styles.addToOrderButton} onClick={handleAddToOrderClick}>{buttonText}</button>
               </>
               )

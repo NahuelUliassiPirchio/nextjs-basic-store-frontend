@@ -9,7 +9,7 @@
 }
 .imagesContainer .productImg {
   border-radius: 20px;
-  object-fit: cover;
+  object-fit: contain;
 }
 .imagesContainer .brandLogo {
   width: 40px;

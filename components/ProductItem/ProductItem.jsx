@@ -4,6 +4,7 @@ import Link from 'next/link'
 
 import style from './ProductItem.module.css'
 
+import { formatPrice } from '../../utils/formatters'
 import { useCartStore } from '../../store/cartStore'
 import useStore from '../../hooks/useStore'
 
@@ -28,7 +29,7 @@ export default function ProductItem ({ product, bid }) {
 
   const bidCount = bidders ? bidders.length : 0
   const actualPrice = bidders?.length > 0 ? Math.max(...bidders.map(bid => bid.bidAmount)) : product.price
-  const price = bidders ? `Actual price: $${actualPrice}` : `$${product.price}`
+  const price = bidders ? `Actual price: $${formatPrice(actualPrice)}` : `$${formatPrice(product.price)}`
 
   return (
     <div className={style.productCard} onClick={clickHandler}>

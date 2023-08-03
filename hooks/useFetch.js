@@ -7,7 +7,6 @@ function useFetchData ({ url, method = 'GET', body }) {
 
   useEffect(() => {
     if (!url) return
-    console.log('siguio')
     setIsLoading(true)
     fetch(url, {
       method,

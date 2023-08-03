@@ -10,7 +10,6 @@ import OutsideAlerter from '../../utils/OutsideAlerter'
 function CategoriesList () {
   const { data: categories, isLoading } = useFetchData({ url: endpoints.categories.categories, method: 'GET' })
   const [showCategories, setShowCategories] = useState(false)
-  console.log(categories)
 
   if (!categories && !isLoading) return null
   return (
