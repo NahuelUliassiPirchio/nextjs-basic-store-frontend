@@ -51,7 +51,7 @@ const endpoints = {
     brand: (id) => `${URL}/brands/${id}`,
     brands: `${URL}/brands`
   },
-  about: 'https://uliassipirchio.me/projects/basic-store'
+  about: process.env.ABOUT_URL || 'https://uliassipirchio.com/projects/basic-store'
 }
 
 export default endpoints

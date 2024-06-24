@@ -15,7 +15,7 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  object-fit: cover;
+  object-fit: scale-down;
   position: absolute;
   top: 12px;
   right: 12px;
