@@ -35,13 +35,16 @@ export default function ProductItem ({ product, bid }) {
     <div className={style.productCard} onClick={clickHandler}>
       <div className={style.imagesContainer}>
         <Image className={style.productImg} src={product.image} alt={`${product.name}'s image`} width={200} height={200} />
-        <Link href={`/brands/${product.brand.id}`} passHref onClick={e => e.stopPropagation()}>
-          <Image className={style.brandLogo} src={product.brand.logo} alt={`${product.brand.name}'s image`} width={50} height={50} title={product.brand.name} />
-        </Link>
+        {
+          !bid && (<Link href={`/brands/${product.brand.id}`} passHref onClick={e => e.stopPropagation()}>
+            <Image className={style.brandLogo} src={product.brand.logo} alt={`${product.brand.name}'s image`} width={50} height={50} title={product.brand.name} />
+            {/*  eslint-disable-next-line react/jsx-closing-tag-location */}
+          </Link>)
+        }
       </div>
       <div className={style.productInfo}>
         <div>
-          <p>{product.name} - {product.brand.name}</p>
+          <p>{product.name} - {!bid && product.brand.name}</p>
           <p>{price}</p>
         </div>
         {

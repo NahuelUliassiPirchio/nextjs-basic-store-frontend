@@ -87,7 +87,7 @@ export default function Cart () {
                 ? cart?.map((product) => (
                   <li key={product.id} className={styles.cartItem}>
                     <Image src={product.image} alt={product.name} width={50} height={50} />
-                    <h3>{product.name} - {product.brand.name}</h3>
+                    <h3>{product.name}</h3>
                     <p>+${product.price}</p>
                     <div className={styles.quantityHandler}>
                       <button onClick={e => handleUpdateQuantity(e, product, +1)}>+</button>

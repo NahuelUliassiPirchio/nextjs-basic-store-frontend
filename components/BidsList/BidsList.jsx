@@ -18,11 +18,14 @@ const BidsList = () => {
               : (
                   bids.length > 0
                     ? (
-                        bids.map((bid) => (
-                          <li key={bid.id} className={styles.item}>
-                            <ProductItem product={bid.product} bid={bid} />
-                          </li>
-                        ))
+                        bids.map((bid) => {
+                          console.log(bid)
+                          return (
+                            <li key={bid.id} className={styles.item}>
+                              <ProductItem product={bid.product} bid={bid} />
+                            </li>
+                          )
+                        })
                       )
                     : (
                       <h1>No active bids at the moment</h1>
