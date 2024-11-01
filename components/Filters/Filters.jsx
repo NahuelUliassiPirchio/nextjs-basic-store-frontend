@@ -34,8 +34,19 @@ export default function Filters () {
 
     if (order !== 'none') newQuery.order = order
 
-    if (parseInt(minPrice) > 0) newQuery.minPrice = minPrice
-    if (parseInt(maxPrice) > parseInt(minPrice)) newQuery.maxPrice = maxPrice
+    const minPriceParsed = parseInt(minPrice)
+    const maxPriceParsed = parseInt(maxPrice)
+
+    if (isNaN(minPriceParsed) && maxPriceParsed > 0) {
+      newQuery.minPrice = 1
+    } else if (minPriceParsed > 0) {
+      newQuery.minPrice = minPriceParsed
+    }
+
+    if (maxPriceParsed > (newQuery.minPrice || 0)) {
+      newQuery.maxPrice = maxPriceParsed
+    }
+
     router.push({
       pathname: '/',
       query: newQuery
