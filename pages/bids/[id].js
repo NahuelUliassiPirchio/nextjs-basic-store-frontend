@@ -18,7 +18,7 @@ export default function BidDisplay ({ bid }) {
   return (
     <>
       <Head>
-        <title>Hurry! {bid.product.name}</title>
+        <title>{`BSC Store | Bid: ${bid.product.name}`}</title>
       </Head>
       <AuthProvider>
         <Bid bid={bid} />

@@ -25,7 +25,7 @@ export default function OrdersPage () {
   return (
     <>
       <Head>
-        <title>Orders</title>
+        <title>BSC Store | Orders</title>
       </Head>
       <div style={{ minHeight: '70vh' }}>
         <h1>Orders</h1>

@@ -66,7 +66,7 @@ export default function Home ({ category, products }) {
   return (
     <>
       <Head>
-        <title>Home</title>
+        <title>BSC Store | Home</title>
       </Head>
       <Filters />
       {category && <h1 className='title'>{category.name}</h1>}

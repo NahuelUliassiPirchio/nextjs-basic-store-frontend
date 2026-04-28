@@ -1,14 +1,16 @@
-import Link from 'next/link'
+import Head from 'next/head'
 import SignUp from '../components/SignUp/SignUp'
 import { AuthProvider } from '../hooks/useAuth'
 
 export default function SignUpPage () {
   return (
     <>
+      <Head>
+        <title>BSC Store | Sign Up</title>
+      </Head>
       <AuthProvider>
         <SignUp />
       </AuthProvider>
-      <p style={{ marginLeft: '1rem' }}>Do you already have an account? <Link href='/login'><u>Login</u></Link></p>
     </>
   )
 }

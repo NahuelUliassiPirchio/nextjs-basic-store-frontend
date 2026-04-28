@@ -1,10 +1,11 @@
 import Router from 'next/router'
+import Link from 'next/link'
 import { useRef } from 'react'
 import { useAuth } from '../../hooks/useAuth'
 import styles from './Login.module.css'
 
 export default function Login () {
-  const { signin, loading, error } = useAuth()
+  const { signin, isLoading, error } = useAuth()
   const emailRef = useRef()
   const passwordRef = useRef()
 
@@ -22,14 +23,24 @@ export default function Login () {
   return (
     <div className={styles.loginContainer}>
       <form className={styles.loginForm} onSubmit={handleSubmit}>
-        <h1>Login</h1>
-        {loading && <p>Loading...</p>}
+        <p className={styles.kicker}>Welcome back</p>
+        <h1>Login to your account</h1>
+        <p className={styles.subtitle}>Pick up where you left off and keep exploring the store.</p>
         {error && <p className={styles.error}>{error}</p>}
-        <label htmlFor='email'>Email</label>
-        <input type='email' name='email' id='email' ref={emailRef} />
-        <label htmlFor='password'>Password</label>
-        <input type='password' htmlFor='password' name='password' id='password' ref={passwordRef} />
-        <button className={styles.submitButton} type='submit'>Login</button>
+        <div className={styles.field}>
+          <label htmlFor='email'>Email</label>
+          <input type='email' name='email' id='email' ref={emailRef} placeholder='you@example.com' autoComplete='email' required />
+        </div>
+        <div className={styles.field}>
+          <label htmlFor='password'>Password</label>
+          <input type='password' name='password' id='password' ref={passwordRef} placeholder='Your password' autoComplete='current-password' required />
+        </div>
+        <button className={styles.submitButton} type='submit' disabled={isLoading}>
+          {isLoading ? 'Logging in...' : 'Login'}
+        </button>
+        <p className={styles.switchAuth}>
+          New here? <Link href='/signup'>Create an account</Link>
+        </p>
       </form>
     </div>
   )

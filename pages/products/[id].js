@@ -38,7 +38,7 @@ export default function ProductDisplay ({ product }) {
   return (
     <>
       <Head>
-        <title>{`${product.name}`}</title>
+        <title>{`BSC Store | ${product.name}`}</title>
       </Head>
       <AuthProvider>
         <Product product={product} />
