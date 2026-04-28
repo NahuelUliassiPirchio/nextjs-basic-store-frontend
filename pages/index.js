@@ -4,6 +4,7 @@ import Advertisement from '../components/Advertisement/Advertisement'
 import Pagination from '../components/Pagination/Pagination'
 import ProductsList from '../components/ProductsList/ProductsList'
 import Filters from '../components/Filters/Filters'
+import ErrorState from '../components/ErrorState/ErrorState'
 
 const limit = 10
 
@@ -60,7 +61,7 @@ export async function getServerSideProps (context) {
 
 export default function Home ({ category, products }) {
   if (!products) {
-    return <h1 style={{ height: '80vh' }}>Something went wrong</h1>
+    return <ErrorState />
   }
   return (
     <>

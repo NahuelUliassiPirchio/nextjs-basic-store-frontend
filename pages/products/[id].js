@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Product from '../../components/Product/Product'
 import endpoints from '../../common/endpoints'
 import { AuthProvider } from '../../hooks/useAuth'
+import ErrorState from '../../components/ErrorState/ErrorState'
 
 export async function getServerSideProps (context) {
   const { id } = context.query
@@ -27,7 +28,12 @@ export async function getServerSideProps (context) {
 
 export default function ProductDisplay ({ product }) {
   if (!product) {
-    return <h1 style={{ height: '80vh' }}>Something went wrong</h1>
+    return (
+      <ErrorState
+        title='We could not find this product'
+        message='It is not your fault. Our support kitty is searching for this product and checking what happened.'
+      />
+    )
   }
   return (
     <>

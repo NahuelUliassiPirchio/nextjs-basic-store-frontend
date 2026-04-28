@@ -3,6 +3,7 @@ import Head from 'next/head'
 import ProductsList from '../../components/ProductsList/ProductsList'
 import endpoints from '../../common/endpoints'
 import TitleWithImage from '../../components/TitleWithImage/TitleWithImage'
+import ErrorState from '../../components/ErrorState/ErrorState'
 
 export async function getServerSideProps (context) {
   const { id } = context.query
@@ -33,7 +34,12 @@ export async function getServerSideProps (context) {
 
 export default function BrandDisplay ({ brand, products }) {
   if (!brand) {
-    return <h1 style={{ height: '80vh' }}>Something went wrong</h1>
+    return (
+      <ErrorState
+        title='We could not load this brand'
+        message='It is not your fault. Our support kitty is checking the showcase so you can view it again soon.'
+      />
+    )
   }
   return (
     <>
