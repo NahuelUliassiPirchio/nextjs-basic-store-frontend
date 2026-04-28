@@ -84,17 +84,22 @@ export default function Product ({ product, bidUp, currentPrice }) {
         {
           bidUp
             ? (
-              <>
+              <div className={styles.bidPanel}>
+                <div className={styles.currentBid}>
+                  <span>Current bid</span>
+                  <strong>${formatPrice(currentPrice)}</strong>
+                </div>
                 <div className={styles.bidUp}>
                   <button onClick={() => bidUp(currentPrice + 1)}>Bid Up $1</button>
                   <button onClick={() => bidUp(currentPrice + 5)}>Bid Up $5</button>
                   <button onClick={() => bidUp(currentPrice + 10)}>Bid Up $10</button>
                 </div>
                 <div className={styles.customBid}>
-                  <input type='number' ref={bidAmount} defaultValue={currentPrice + 1} min={currentPrice + 1} />
+                  <label htmlFor='customBid'>Custom bid</label>
+                  <input id='customBid' type='number' ref={bidAmount} defaultValue={currentPrice + 1} min={currentPrice + 1} />
                   <button onClick={() => bidUp(bidAmount.current.value)}>Bid Up</button>
                 </div>
-              </>
+              </div>
               )
             : (
               <>

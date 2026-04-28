@@ -5,6 +5,8 @@ export default function Pagination ({ total }) {
   const router = useRouter()
   const current = Number(router.query.page) || 1
 
+  if (total <= 1) return null
+
   const handlePageChange = (page) => {
     const { pathname, query } = router
     router.push({

@@ -1,24 +1,83 @@
+.bidsSection {
+  width: min(94%, 1200px);
+  margin: 2rem auto 3rem;
+}
+
+.bidsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 1.25rem;
+  border: 1px solid #e6e0bf;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #fff 0%, #fbfaf3 100%);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.06);
+}
+
+.bidsHeader p {
+  color: #7b744c;
+  font-size: .75rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.bidsHeader h1 {
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: 1;
+}
+
+.bidsHeader span {
+  padding: .45rem .75rem;
+  border-radius: 999px;
+  background-color: #111;
+  color: #c7c095;
+  font-size: .85rem;
+  font-weight: 800;
+}
+
 .bidsList {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  grid-gap: 20px;
-  margin: 20px;
-  max-width: 1500px;
-  padding: 40px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 28px;
+  margin: 0;
+  padding: 0;
 }
 
 .bidsList li {
   list-style: none;
-  padding: 10px;
+  padding: 0;
 }
 
 .bidsList > * {
   justify-self: center;
+  width: 100%;
+}
+
+.emptyState {
+  padding: 2rem;
+  border: 1px dashed #c7c095;
+  border-radius: 18px;
+  background-color: #fbfaf3;
+  color: #555;
+  font-size: 1.1rem;
+  text-align: center;
 }
 
 @media screen and (max-width: 768px) {
+  .bidsSection {
+    width: min(92%, 420px);
+    margin-top: 1rem;
+  }
+
+  .bidsHeader {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
   .bidsList {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    margin: 0;
+    grid-template-columns: 1fr;
   }
 }

@@ -14,6 +14,7 @@ export default function ProductItem ({ product, bid }) {
   const cart = useStore(useCartStore, (state) => state.cart) || []
 
   const bidders = bid && bid.bidders
+  const isExpiredBid = bid && (!bid.isActive || new Date(bid.endDate) <= new Date())
   const clickHandler = () => {
     if (bidders) {
       router.push(`/bids/${bid.id}`)
@@ -30,11 +31,20 @@ export default function ProductItem ({ product, bid }) {
   const bidCount = bidders ? bidders.length : 0
   const actualPrice = bidders?.length > 0 ? Math.max(...bidders.map(bid => bid.bidAmount)) : product.price
   const price = bidders ? `Actual price: $${formatPrice(actualPrice)}` : `$${formatPrice(product.price)}`
+  const endDate = bid
+    ? new Date(bid.endDate).toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    })
+    : null
 
   return (
-    <div className={style.productCard} onClick={clickHandler}>
+    <div className={`${style.productCard} ${bid ? style.bidCard : ''} ${isExpiredBid ? style.expiredBidCard : ''}`} onClick={clickHandler}>
       <div className={style.imagesContainer}>
         <Image className={style.productImg} src={product.image} alt={`${product.name}'s image`} width={200} height={200} />
+        {isExpiredBid && <span className={style.expiredRibbon}>Finished</span>}
         {
           !bid && (<Link href={`/brands/${product.brand.id}`} passHref onClick={e => e.stopPropagation()}>
             <Image className={style.brandLogo} src={product.brand.logo} alt={`${product.brand.name}'s image`} width={50} height={50} title={product.brand.name} />
@@ -49,22 +59,27 @@ export default function ProductItem ({ product, bid }) {
         {
           bidders && (
             <div className={style.bidInfo}>
-              <p>{bidCount} bids</p>
-              <p>Ends in {bid.endDate}</p>
+              <span className={style.bidBadge}>{isExpiredBid ? 'Finished' : 'Live bid'}</span>
+              <p>{bidCount} {bidCount === 1 ? 'bid' : 'bids'}</p>
+              <p>{isExpiredBid ? 'Ended' : 'Ends'} {endDate}</p>
             </div>
           )
         }
-        <figure>
-          {
-            cart.find(item => item.id === product.id)
-              ? (
-                <Image src='/icons/added-to-cart.svg' alt='Remove from cart' width={50} height={50} onClick={handleAddToCart} title='Remove From Cart' />
-                )
-              : (
-                <Image src='/icons/add-to-cart.svg' alt='Add to cart' width={50} height={50} onClick={handleAddToCart} title='Add To Cart' />
-                )
-          }
-        </figure>
+        {
+          !bid && (
+            <figure>
+              {
+                cart.find(item => item.id === product.id)
+                  ? (
+                    <Image src='/icons/added-to-cart.svg' alt='Remove from cart' width={50} height={50} onClick={handleAddToCart} title='Remove From Cart' />
+                    )
+                  : (
+                    <Image src='/icons/add-to-cart.svg' alt='Add to cart' width={50} height={50} onClick={handleAddToCart} title='Add To Cart' />
+                    )
+              }
+            </figure>
+          )
+        }
       </div>
     </div>
   )

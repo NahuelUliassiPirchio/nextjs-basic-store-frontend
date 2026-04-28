@@ -44,7 +44,7 @@
 }
 
 .description {
-  height: 25%;
+  height: auto;
   margin: 0.75rem;
 }
 
@@ -72,14 +72,40 @@
   border: 1px solid #c7c095;
 }
 
-.bidUp {
+.bidPanel {
+  margin: 1rem .5rem 0;
+  padding: 1rem;
+  border: 1px solid #e6e0bf;
+  border-radius: 18px;
+  background-color: #fbfaf3;
+}
+
+.currentBid {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  max-width: 600px;
+  gap: 1rem;
+  margin-bottom: .9rem;
+  padding-bottom: .9rem;
+  border-bottom: 1px solid #e6e0bf;
+}
+
+.currentBid span {
+  color: #6f6f6f;
+  font-weight: 700;
+}
+
+.currentBid strong {
+  font-size: 1.6rem;
+}
+
+.bidUp {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: .65rem;
+  margin-bottom: .9rem;
 }
 
 .bidUp > button {
@@ -87,8 +113,71 @@
   color: #000;
   font-weight: bold;
   border: none;
-  border-radius: 5px;
-  padding: 0.5rem;
-  margin: 0.5rem;
+  border-radius: 10px;
+  padding: 0.65rem .85rem;
+  margin: 0;
+  font-family: inherit;
   cursor: pointer;
+}
+
+.bidUp > button:hover {
+  background-color: #111;
+  color: #fff;
+}
+
+.customBid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: .65rem;
+  align-items: end;
+}
+
+.customBid label {
+  grid-column: 1 / -1;
+  color: #333;
+  font-weight: 700;
+}
+
+.customBid input {
+  min-height: 42px;
+  min-width: 0;
+  padding: .6rem .75rem;
+  border: 1px solid #d6cfaa;
+  border-radius: 10px;
+  background-color: #fff;
+  font: inherit;
+}
+
+.customBid button {
+  min-height: 42px;
+  padding: .6rem .9rem;
+  border: 1px solid #111;
+  border-radius: 10px;
+  background-color: #111;
+  color: #fff;
+  font-family: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.customBid button:hover {
+  background-color: #c7c095;
+  border-color: #c7c095;
+  color: #111;
+}
+
+@media screen and (max-width: 768px) {
+  .currentBid {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .bidUp > button,
+  .customBid button {
+    width: 100%;
+  }
+
+  .customBid {
+    grid-template-columns: 1fr;
+  }
 }

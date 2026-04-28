@@ -8,8 +8,8 @@ export default function Filters () {
 
   const query = router.query
   const queryOrder = query?.order || 'none'
-  const minPrice = query?.minPrice || 0
-  const maxPrice = query?.maxPrice || 0
+  const minPrice = query?.minPrice || ''
+  const maxPrice = query?.maxPrice || ''
 
   const formRef = useRef(null)
 
@@ -32,6 +32,9 @@ export default function Filters () {
     const formData = new FormData(formRef.current)
     const { order, minPrice, maxPrice } = Object.fromEntries(formData.entries())
     const newQuery = { ...query }
+    delete newQuery.order
+    delete newQuery.minPrice
+    delete newQuery.maxPrice
 
     if (order !== 'none') newQuery.order = order
 
@@ -56,23 +59,32 @@ export default function Filters () {
 
   return (
     <section className={styles.filtersContainer}>
+      <div className={styles.filtersHeader}>
+        <div>
+          <p className={styles.eyebrow}>Shop smarter</p>
+          <h2>Filters</h2>
+        </div>
+        <p className={styles.helperText}>Refine the catalog by price range and sorting preference.</p>
+      </div>
       <form className={styles.filtersForm} onSubmit={handleSubmit} ref={formRef}>
         <div className={styles.priceFilter}>
-          <label htmlFor='price'>Price</label>
+          <label htmlFor='minPrice'>Price range</label>
           <input
             type='number'
-            id='price'
+            id='minPrice'
             name='minPrice'
             min={0}
             placeholder='Min price'
+            defaultValue={minPrice}
           />
           <span>to</span>
           <input
             type='number'
-            id='price'
+            id='maxPrice'
             name='maxPrice'
             placeholder='Max price'
             min={minPrice}
+            defaultValue={maxPrice}
           />
         </div>
 
@@ -91,9 +103,10 @@ export default function Filters () {
         </div>
 
         <div className={styles.buttonsContainer}>
-          <input className={`${styles.button} ${styles.filterButton}`} type='submit' value='Filter' />
+          <input className={`${styles.button} ${styles.filterButton}`} type='submit' value='Apply filters' />
           <button className={styles.cleanFiltersButton} type='button' onClick={handleCleanFilters}>
             <Image src='/icons/clear.svg' alt='Clean filters' width={25} height={25} title='Clean filters' />
+            <span>Clear</span>
           </button>
         </div>
       </form>
