@@ -38,7 +38,6 @@ export default function ProductItem ({ product, bid }) {
         {
           !bid && (<Link href={`/brands/${product.brand.id}`} passHref onClick={e => e.stopPropagation()}>
             <Image className={style.brandLogo} src={product.brand.logo} alt={`${product.brand.name}'s image`} width={50} height={50} title={product.brand.name} />
-            {/*  eslint-disable-next-line react/jsx-closing-tag-location */}
           </Link>)
         }
       </div>

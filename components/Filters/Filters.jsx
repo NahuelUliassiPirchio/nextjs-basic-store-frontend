@@ -6,7 +6,7 @@ import Image from 'next/image'
 export default function Filters () {
   const router = useRouter()
 
-  const { query } = router.query
+  const query = router.query
   const queryOrder = query?.order || 'none'
   const minPrice = query?.minPrice || 0
   const maxPrice = query?.maxPrice || 0
@@ -14,15 +14,16 @@ export default function Filters () {
   const formRef = useRef(null)
 
   const handleCleanFilters = () => {
-    queryOrder && delete router.query.order
-    minPrice && delete router.query.minPrice
-    maxPrice && delete router.query.maxPrice
+    const newQuery = { ...query }
+    delete newQuery.order
+    delete newQuery.minPrice
+    delete newQuery.maxPrice
 
     formRef.current.reset()
 
     router.push({
       pathname: '/',
-      query
+      query: newQuery
     })
   }
 

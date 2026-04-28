@@ -1,5 +1,5 @@
 import Router from 'next/router'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useAuth } from '../../hooks/useAuth'
 import styles from './SignUp.module.css'
 
@@ -32,12 +32,6 @@ export default function SignUp () {
     }
   }
 
-  useEffect(() => {
-    if (error) {
-      setFormError(error)
-    }
-  }, [error])
-
   return (
     <div className={styles.signUpContainer}>
       <h1>Sign Up</h1>
@@ -54,7 +48,7 @@ export default function SignUp () {
         <input type='password' name='password' id='password' />
         <label htmlFor='passwordConfirmation'>Password Confirmation</label>
         <input type='password' name='passwordConfirmation' id='passwordConfirmation' />
-        {formError && <p className={styles.error}>{formError}</p>}
+        {(formError || error) && <p className={styles.error}>{formError || error}</p>}
         <button className={styles.submitButton} type='submit'>Sign Up</button>
       </form>
     </div>
