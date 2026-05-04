@@ -1,24 +1,91 @@
-.orderContainer {
+.orderCard {
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+  background: #fff;
+  overflow: hidden;
+}
+
+.orderHeader {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #f0edd8;
+  background: #fafaf5;
+}
+
+.orderTitle {
   display: flex;
-  flex-direction: column;
-  width: 100%;
-  padding: 20px;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.orderTitle h2 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #222;
   margin: 0;
 }
 
-.orderContainer h2 {
-  margin: 10px 0;
+.orderTitle h2 span {
+  color: #999;
+  font-weight: 500;
 }
 
-.orderContainer ul {
+.badge {
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.badgeActive {
+  background: #edfaf3;
+  color: #1a7f4e;
+}
+
+.badgeClosed {
+  background: #f4f4f4;
+  color: #999;
+}
+
+.itemsList {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
+.orderSummary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #f0edd8;
+  background: #fafaf5;
+}
+
+.summaryCount {
+  font-size: 0.9rem;
+  color: #999;
+}
+
+.summaryTotal {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.summaryTotal strong {
+  font-size: 1.2rem;
+  color: #111;
+  margin-left: 0.25rem;
+}
+
 @media (max-width: 768px) {
-  .orderContainer {
-    font-size: .7rem;
-    margin-right: .5rem;
+  .orderCard {
+    border-radius: 8px;
+  }
+
+  .orderHeader,
+  .orderSummary {
+    padding: 0.85rem 1rem;
   }
 }

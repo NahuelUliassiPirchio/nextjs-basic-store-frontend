@@ -25,6 +25,7 @@
   text-decoration: none;
   font-size: 1rem;
   font-weight: 500;
+  font-family: 'DM Sans', sans-serif;
   margin-right: 15px;
   cursor: pointer;
 }
@@ -51,6 +52,7 @@
   text-decoration: none;
   font-size: 1rem;
   font-weight: 500;
+  font-family: 'DM Sans', sans-serif;
 }
 
 .categoriesList li a:hover {
