@@ -5,6 +5,7 @@ import { useState, useRef } from 'react'
 import Router from 'next/router'
 
 import { useAuth } from '../../hooks/useAuth'
+import { useImageZoom } from '../../hooks/useImageZoom'
 import styles from './Product.module.css'
 import endpoints from '../../common/endpoints'
 import { formatPrice } from '../../utils/formatters'
@@ -29,6 +30,7 @@ export default function Product ({ product, bidUp, currentPrice }) {
   const [added, setAdded] = useState(false)
   const [descExpanded, setDescExpanded] = useState(false)
   const bidAmount = useRef()
+  const { isZoomed, containerProps, overlayRef } = useImageZoom()
 
   const isLongDesc = product.description?.length > DESCRIPTION_LIMIT
   const displayedDesc = isLongDesc && !descExpanded
@@ -98,8 +100,14 @@ export default function Product ({ product, bidUp, currentPrice }) {
         </nav>
       )}
       <div className={styles.productMain}>
-        <div className={styles.productImage}>
+        <div className={styles.productImage} {...containerProps}>
           <Image src={product.image} alt={product.name} width={480} height={480} />
+          <div
+            ref={overlayRef}
+            className={`${styles.zoomOverlay}${isZoomed ? ` ${styles.zoomOverlayActive}` : ''}`}
+            style={{ backgroundImage: `url(${product.image})` }}
+            aria-hidden="true"
+          />
         </div>
         <div className={styles.productInfo}>
           {error && <p className={styles.error}>{error.message}</p>}
