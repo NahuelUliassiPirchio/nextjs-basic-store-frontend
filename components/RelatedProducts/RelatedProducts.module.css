@@ -1,0 +1,37 @@
+.section {
+  max-width: 1100px;
+  margin: 0 auto 2rem;
+  padding: 0 1.5rem;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e8e4d0;
+}
+
+.scrollRow {
+  display: flex;
+  gap: 1.25rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.75rem;
+  scrollbar-width: thin;
+  scrollbar-color: #c7c095 transparent;
+}
+
+.scrollRow::-webkit-scrollbar {
+  height: 5px;
+}
+
+.scrollRow::-webkit-scrollbar-thumb {
+  background-color: #c7c095;
+  border-radius: 999px;
+}
+
+.item {
+  flex: 0 0 auto;
+}
