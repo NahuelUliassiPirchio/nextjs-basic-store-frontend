@@ -53,7 +53,7 @@ export default function ProductItem ({ product, bid }) {
       </div>
       <div className={style.productInfo}>
         <div>
-          <p>{product.name} - {!bid && product.brand.name}</p>
+          <p>{product.name}{!bid && ` - ${product.brand.name}`}</p>
           <p>{price}</p>
         </div>
         {

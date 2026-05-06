@@ -7,7 +7,9 @@ import endpoints from '../../common/endpoints'
 
 const BidsList = () => {
   const { list: bids, isLoading, error } = useGetList(endpoints.bids.bids, 1)
-  const activeBidsCount = bids.filter((bid) => bid.isActive && new Date(bid.endDate) > new Date()).length
+  const isActiveBid = (bid) => bid.isActive && new Date(bid.endDate) > new Date()
+  const activeBidsCount = bids.filter(isActiveBid).length
+  const sortedBids = [...bids].sort((a, b) => isActiveBid(b) - isActiveBid(a))
 
   if (isLoading) return <Loading />
 
@@ -40,7 +42,7 @@ const BidsList = () => {
         <span>{activeBidsCount} live, {bids.length - activeBidsCount} finished</span>
       </div>
       <ul className={styles.bidsList}>
-        {bids.map((bid) => (
+        {sortedBids.map((bid) => (
           <li key={bid.id} className={styles.item}>
             <ProductItem product={bid.product} bid={bid} />
           </li>
