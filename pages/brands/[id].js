@@ -44,7 +44,7 @@ export default function BrandDisplay ({ brand, products }) {
   return (
     <>
       <Head>
-        <title>{`BSC Store | Brand: ${brand.name}`}</title>
+        <title>{`Brand: ${brand.name} | BSC Store`}</title>
       </Head>
       <TitleWithImage title={brand.name} image={brand.logo} />
       <ProductsList products={products.data} />

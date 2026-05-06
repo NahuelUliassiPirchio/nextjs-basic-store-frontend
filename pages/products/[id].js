@@ -49,7 +49,7 @@ export default function ProductDisplay ({ product, relatedProducts }) {
   return (
     <>
       <Head>
-        <title>{`BSC Store | ${product.name}`}</title>
+        <title>{`${product.name} | BSC Store`}</title>
       </Head>
       <AuthProvider>
         <Product product={product} />

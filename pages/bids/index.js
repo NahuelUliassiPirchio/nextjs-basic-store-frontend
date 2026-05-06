@@ -5,7 +5,7 @@ export default function BidsPage () {
   return (
     <>
       <Head>
-        <title>BSC Store | Bids</title>
+        <title>Bids | BSC Store</title>
       </Head>
       <BidsList />
     </>

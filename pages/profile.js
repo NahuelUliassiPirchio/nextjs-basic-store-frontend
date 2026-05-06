@@ -6,7 +6,7 @@ export default function Profile () {
   return (
     <>
       <Head>
-        <title>BSC Store | Profile</title>
+        <title>Profile | BSC Store</title>
       </Head>
       <AuthProvider>
         <ProfileInfo />

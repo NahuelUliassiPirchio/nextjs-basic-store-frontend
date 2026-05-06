@@ -34,6 +34,7 @@ function CategoriesList () {
                 <Link
                   href={
                   {
+                    pathname: '/',
                     query: {
                       category: category.id
                     }

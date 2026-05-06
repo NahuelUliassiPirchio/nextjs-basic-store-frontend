@@ -7,7 +7,7 @@ export default function LoginPage () {
   return (
     <>
       <Head>
-        <title>BSC Store | Login</title>
+        <title>Login | BSC Store</title>
       </Head>
       <AuthProvider>
         <Login />

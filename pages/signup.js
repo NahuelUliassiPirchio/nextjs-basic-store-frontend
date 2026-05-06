@@ -6,7 +6,7 @@ export default function SignUpPage () {
   return (
     <>
       <Head>
-        <title>BSC Store | Sign Up</title>
+        <title>Sign Up | BSC Store</title>
       </Head>
       <AuthProvider>
         <SignUp />

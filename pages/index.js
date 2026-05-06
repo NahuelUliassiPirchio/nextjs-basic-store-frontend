@@ -66,10 +66,10 @@ export default function Home ({ category, products }) {
   return (
     <>
       <Head>
-        <title>BSC Store | Home</title>
+        <title>Home | BSC Store</title>
       </Head>
       <Filters />
-      {category && <h1 className='title'>{category.name}</h1>}
+      {category && <h1 className='title' style={{ margin: '1.5rem' }}>{category.name}</h1>}
       <ProductsList products={products.data} />
       <Pagination total={products.totalPages} />
       <Advertisement />

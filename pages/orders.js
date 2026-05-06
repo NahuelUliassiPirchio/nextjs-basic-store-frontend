@@ -25,7 +25,7 @@ export default function OrdersPage () {
   return (
     <>
       <Head>
-        <title>BSC Store | Orders</title>
+        <title>Orders | BSC Store</title>
       </Head>
       <div className={styles.page}>
         <h1 className={styles.title}>My Orders</h1>
