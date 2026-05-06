@@ -1,36 +1,36 @@
-import { useRef } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/router'
+import * as Slider from '@radix-ui/react-slider'
 import styles from './Filters.module.css'
 import Image from 'next/image'
 
-export default function Filters () {
+const MIN_PRICE = 0
+
+export default function Filters ({ maxPrice = 10000 }) {
   const router = useRouter()
 
   const query = router.query
-  const queryOrder = query?.order || 'none'
-  const minPrice = query?.minPrice || ''
-  const maxPrice = query?.maxPrice || ''
+  const initialMin = parseInt(query?.minPrice) || MIN_PRICE
+  const initialMax = parseInt(query?.maxPrice) || maxPrice
 
-  const formRef = useRef(null)
+  const [priceRange, setPriceRange] = useState([initialMin, initialMax])
+  const [order, setOrder] = useState(query?.order || 'none')
 
   const handleCleanFilters = () => {
+    setPriceRange([MIN_PRICE, maxPrice])
+    setOrder('none')
+
     const newQuery = { ...query }
     delete newQuery.order
     delete newQuery.minPrice
     delete newQuery.maxPrice
 
-    formRef.current.reset()
-
-    router.push({
-      pathname: '/',
-      query: newQuery
-    })
+    router.push({ pathname: '/', query: newQuery })
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const formData = new FormData(formRef.current)
-    const { order, minPrice, maxPrice } = Object.fromEntries(formData.entries())
+
     const newQuery = { ...query }
     delete newQuery.order
     delete newQuery.minPrice
@@ -38,23 +38,12 @@ export default function Filters () {
 
     if (order !== 'none') newQuery.order = order
 
-    const minPriceParsed = parseInt(minPrice)
-    const maxPriceParsed = parseInt(maxPrice)
-
-    if (isNaN(minPriceParsed) && maxPriceParsed > 0) {
-      newQuery.minPrice = 1
-    } else if (minPriceParsed > 0) {
-      newQuery.minPrice = minPriceParsed
+    if (priceRange[0] > MIN_PRICE || priceRange[1] < maxPrice) {
+      newQuery.minPrice = priceRange[0]
+      newQuery.maxPrice = priceRange[1]
     }
 
-    if (maxPriceParsed > (newQuery.minPrice || 0)) {
-      newQuery.maxPrice = maxPriceParsed
-    }
-
-    router.push({
-      pathname: '/',
-      query: newQuery
-    })
+    router.push({ pathname: '/', query: newQuery })
   }
 
   return (
@@ -66,26 +55,31 @@ export default function Filters () {
         </div>
         <p className={styles.helperText}>Refine the catalog by price range and sorting preference.</p>
       </div>
-      <form className={styles.filtersForm} onSubmit={handleSubmit} ref={formRef}>
+      <form className={styles.filtersForm} onSubmit={handleSubmit}>
         <div className={styles.priceFilter}>
-          <label htmlFor='minPrice'>Price range</label>
-          <input
-            type='number'
-            id='minPrice'
-            name='minPrice'
-            min={0}
-            placeholder='Min price'
-            defaultValue={minPrice}
-          />
-          <span>to</span>
-          <input
-            type='number'
-            id='maxPrice'
-            name='maxPrice'
-            placeholder='Max price'
-            min={minPrice}
-            defaultValue={maxPrice}
-          />
+          <div className={styles.priceFilterHeader}>
+            <label>Price range</label>
+            <div className={styles.priceValues}>
+              <span>${priceRange[0].toLocaleString()}</span>
+              <span>—</span>
+              <span>${priceRange[1].toLocaleString()}{priceRange[1] === maxPrice ? '+' : ''}</span>
+            </div>
+          </div>
+          <Slider.Root
+            className={styles.sliderRoot}
+            min={MIN_PRICE}
+            max={maxPrice}
+            step={10}
+            value={priceRange}
+            onValueChange={setPriceRange}
+            minStepsBetweenThumbs={1}
+          >
+            <Slider.Track className={styles.sliderTrack}>
+              <Slider.Range className={styles.sliderRange} />
+            </Slider.Track>
+            <Slider.Thumb className={styles.sliderThumb} aria-label='Minimum price' />
+            <Slider.Thumb className={styles.sliderThumb} aria-label='Maximum price' />
+          </Slider.Root>
         </div>
 
         <div className={styles.orderFilter}>
@@ -94,7 +88,8 @@ export default function Filters () {
             className={`${styles.button} ${styles.filterOrderSelect}`}
             name='order'
             id='order'
-            defaultValue={queryOrder}
+            value={order}
+            onChange={(e) => setOrder(e.target.value)}
           >
             <option value='ASC'>Ascendant</option>
             <option value='DESC'>Descendant</option>

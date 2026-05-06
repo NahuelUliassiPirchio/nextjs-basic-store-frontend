@@ -8,6 +8,19 @@ import ErrorState from '../components/ErrorState/ErrorState'
 
 const limit = 10
 
+// Cached per server process / serverless warm instance — refetches on cold start only
+let cachedMaxPrice = null
+
+async function fetchMaxPrice () {
+  try {
+    const res = await fetch(`${endpoints.products.products}?limit=1&order=DESC`)
+    const data = await res.json()
+    const price = data.data?.[0]?.price
+    if (price > 0) return Math.ceil(price / 500) * 500
+  } catch {}
+  return 10000
+}
+
 export async function getServerSideProps (context) {
   const { category, page, minPrice, maxPrice, order } = context.query
   const offset = (page - 1) * limit || 0
@@ -32,6 +45,8 @@ export async function getServerSideProps (context) {
   }
 
   try {
+    if (!cachedMaxPrice) cachedMaxPrice = await fetchMaxPrice()
+
     const productsReq = fetch(productQuery)
     const [productsRes, categoryRes] = await Promise.all([productsReq, categoryReq])
     const products = await productsRes.json()
@@ -44,7 +59,8 @@ export async function getServerSideProps (context) {
     return {
       props: {
         category: categoryObject,
-        products
+        products,
+        maxPrice: cachedMaxPrice
       }
     }
   } catch (error) {
@@ -54,12 +70,13 @@ export async function getServerSideProps (context) {
   return {
     props: {
       products: null,
-      category: null
+      category: null,
+      maxPrice: 10000
     }
   }
 }
 
-export default function Home ({ category, products }) {
+export default function Home ({ category, products, maxPrice }) {
   if (!products) {
     return <ErrorState />
   }
@@ -68,7 +85,7 @@ export default function Home ({ category, products }) {
       <Head>
         <title>Home | BSC Store</title>
       </Head>
-      <Filters />
+      <Filters maxPrice={maxPrice} />
       {category && <h1 className='title' style={{ margin: '1.5rem' }}>{category.name}</h1>}
       <ProductsList products={products.data} />
       <Pagination total={products.totalPages} />
