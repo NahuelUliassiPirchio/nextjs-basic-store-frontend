@@ -1,13 +1,10 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import Cookies from 'js-cookie'
 import { useState, useRef } from 'react'
-import Router from 'next/router'
 
-import { useAuth } from '../../hooks/useAuth'
 import { useImageZoom } from '../../hooks/useImageZoom'
+import { useCartStore } from '../../store/cartStore'
 import styles from './Product.module.css'
-import endpoints from '../../common/endpoints'
 import { formatPrice } from '../../utils/formatters'
 
 const DESCRIPTION_LIMIT = 150
@@ -23,11 +20,9 @@ function StockIndicator ({ stock }) {
 }
 
 export default function Product ({ product, bidUp, currentPrice }) {
-  const { user } = useAuth()
-  const token = Cookies.get('token')
-  const [error, setError] = useState(null)
-  const [isLoading, setIsLoading] = useState(false)
+  const updateQuantity = useCartStore((state) => state.updateQuantity)
   const [added, setAdded] = useState(false)
+  const [quantity, setQuantity] = useState(1)
   const [descExpanded, setDescExpanded] = useState(false)
   const bidAmount = useRef()
   const { isZoomed, containerProps, overlayRef } = useImageZoom()
@@ -37,55 +32,12 @@ export default function Product ({ product, bidUp, currentPrice }) {
     ? product.description.slice(0, DESCRIPTION_LIMIT) + '…'
     : product.description
 
-  const handleAddToOrderClick = async () => {
-    if (!user) return Router.push('/login')
-    setIsLoading(true)
-    setError(null)
-    try {
-      let order = await fetch(`${endpoints.orders.orders}?isActive=true`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        }
-      }).then(res => res.json())
+  const maxQuantity = product.stock > 0 ? product.stock : 0
 
-      if (order.length === 0) {
-        order = await fetch(endpoints.orders.orders, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`
-          },
-          body: JSON.stringify({ userId: user.id })
-        }).then(res => res.json())
-      } else {
-        order = order[0]
-        order.id = parseInt(order.id)
-      }
-
-      const orderItem = await fetch(endpoints.orders.allOrderItems(order.id), {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify({
-          productId: product.id,
-          quantity: 1,
-          orderId: order.id
-        })
-      }).then(res => {
-        if (res.ok) return res.json()
-        throw new Error('Something went wrong')
-      })
-
-      if (orderItem?.id) setAdded(true)
-    } catch (err) {
-      setError(err)
-    } finally {
-      setIsLoading(false)
-    }
+  const handleAddToCart = () => {
+    updateQuantity(product, quantity)
+    setAdded(true)
+    setTimeout(() => setAdded(false), 2000)
   }
 
   return (
@@ -110,7 +62,6 @@ export default function Product ({ product, bidUp, currentPrice }) {
           />
         </div>
         <div className={styles.productInfo}>
-          {error && <p className={styles.error}>{error.message}</p>}
           {!bidUp && (
             <Link href={`/brands/${product.brand.id}`} className={styles.brandRow}>
               <Image
@@ -158,13 +109,28 @@ export default function Product ({ product, bidUp, currentPrice }) {
               <>
                 <p className={styles.price}>${formatPrice(product.price)}</p>
                 {product.stock !== undefined && <StockIndicator stock={product.stock} />}
-                <button
-                  className={`${styles.addToOrderButton} ${added ? styles.addedToOrder : ''}`}
-                  onClick={handleAddToOrderClick}
-                  disabled={isLoading || added || product.stock === 0}
-                >
-                  {isLoading ? 'Adding…' : added ? 'Added to Order ✓' : 'Add to Order'}
-                </button>
+                <div className={styles.addToCartRow}>
+                  <div className={styles.quantitySelector}>
+                    <button
+                      className={styles.qtyBtn}
+                      onClick={() => setQuantity(q => Math.max(1, q - 1))}
+                      disabled={quantity <= 1 || product.stock === 0}
+                    >−</button>
+                    <span className={styles.qtyValue}>{quantity}</span>
+                    <button
+                      className={styles.qtyBtn}
+                      onClick={() => setQuantity(q => Math.min(maxQuantity, q + 1))}
+                      disabled={quantity >= maxQuantity || product.stock === 0}
+                    >+</button>
+                  </div>
+                  <button
+                    className={`${styles.addToCartButton} ${added ? styles.addedToCart : ''}`}
+                    onClick={handleAddToCart}
+                    disabled={added || product.stock === 0}
+                  >
+                    {added ? 'Added ✓' : 'Add to cart'}
+                  </button>
+                </div>
               </>
               )}
         </div>
