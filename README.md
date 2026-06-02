@@ -1,36 +1,122 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Basic Store — Frontend
 
-## Getting Started
+> E-commerce web app with product browsing, cart management, and a live bidding system.
 
-First, run the development server:
+## 📖 About
+
+Basic Store is the frontend of my first public web application — a fullstack e-commerce platform built to apply and consolidate knowledge in modern web development. Users can browse products by category or brand, filter by price range, manage a shopping cart, place orders, and participate in real-time product auctions. The frontend is built with Next.js and connects to a RESTful NestJS API deployed on Azure.
+
+## ✨ Features
+
+- Browse and search products with price-range and category filters
+- Product detail page with image zoom and related products
+- Bid on products with a live countdown timer
+- Shopping cart with quantity selection, powered by Zustand
+- User authentication — login, sign-up, and profile management
+- Order history per user
+- Brand-specific product pages
+
+---
+
+## 🛠 Tech Stack
+
+| Category | Technology |
+|----------|-----------|
+| Framework | Next.js 16 / React 18 |
+| Language | JavaScript |
+| Styling | CSS Modules |
+| State | Zustand |
+| UI Components | Radix UI Slider |
+| Date Handling | Day.js |
+| Auth | Cookie-based JWT (js-cookie) |
+| Deployment | Vercel |
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 24 or higher
+
+### Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
+git clone https://github.com/NahuelUliassiPirchio/nextjs-basic-store-frontend.git
+cd nextjs-basic-store-frontend
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Copy the example environment file and fill in your values:
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+```bash
+cp example.env .env.local
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+---
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## ⚙️ Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `STORE_API_URL` | Base URL of the Basic Store REST API | ✅ |
+| `ABOUT_URL` | URL to the project's about/portfolio page | No |
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 📁 Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+├── pages/                # Next.js Pages Router
+│   ├── index.js          # Home — product listing
+│   ├── products/[id].js  # Product detail
+│   ├── bids/             # Bids listing and detail
+│   ├── brands/[id].js    # Brand-specific products
+│   ├── orders.js         # User orders
+│   ├── profile.js        # User profile
+│   ├── login.js
+│   └── signup.js
+├── components/           # Reusable UI components
+├── store/                # Zustand stores
+├── hooks/                # Custom React hooks
+├── utils/                # Helper functions
+├── common/               # Shared constants and config
+└── styles/               # Global styles
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🖥 Usage
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Development**
+```bash
+npm run dev
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+**Production build**
+```bash
+npm run build
+npm run start
+```
+
+**Lint**
+```bash
+npm run lint
+```
+
+---
+
+## 🌐 Live Demo
+
+- **Frontend:** [nextjs-basic-store-frontend.vercel.app](https://nextjs-basic-store-frontend.vercel.app)
+- **API Docs:** [Basic Store Swagger](https://bsc-store-f4gyb8eqh4cvc9fb.brazilsouth-01.azurewebsites.net/basic-store/docs)
+
+---
+
+## 👤 Author
+
+**Nahuel Uliassi Pirchio**
+
+- 🌐 [uliassipirchio.com](https://uliassipirchio.com)
+- 💼 [LinkedIn](https://linkedin.com/in/uliassipirchio)
+- 🐙 [GitHub](https://github.com/NahuelUliassiPirchio)
